@@ -1,0 +1,563 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>VISUAL DESIGN | 23.5°N</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@400;500;600;700&amp;family=Inter:wght@400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-surface-variant": "#444748",
+              "on-secondary-fixed": "#1b1c19",
+              "tertiary-fixed-dim": "#ffb4a8",
+              outline: "#747878",
+              "on-background": "#1c1c16",
+              "on-tertiary-fixed": "#410000",
+              "surface-container": "#f2ede4",
+              "secondary-fixed": "#e4e2dd",
+              "surface-tint": "#5f5e5e",
+              tertiary: "#000000",
+              "on-surface": "#1c1c16",
+              "surface-container-high": "#ece8df",
+              "surface-container-highest": "#e6e2d9",
+              "error-container": "#ffdad6",
+              background: "#fdf9f0",
+              "on-primary-fixed-variant": "#474746",
+              "inverse-primary": "#c8c6c5",
+              "on-tertiary-container": "#ea4c3a",
+              "outline-variant": "#c4c7c7",
+              "surface-dim": "#dedad1",
+              "on-secondary-fixed-variant": "#474744",
+              "on-primary": "#ffffff",
+              "on-secondary-container": "#63635f",
+              "primary-fixed": "#e5e2e1",
+              "secondary-container": "#e1dfdb",
+              primary: "#000000",
+              "on-tertiary": "#ffffff",
+              "surface-variant": "#e6e2d9",
+              "primary-container": "#1c1b1b",
+              "inverse-surface": "#32302a",
+              "surface-container-lowest": "#ffffff",
+              "on-secondary": "#ffffff",
+              "on-tertiary-fixed-variant": "#920703",
+              "primary-fixed-dim": "#c8c6c5",
+              "on-primary-fixed": "#1c1b1b",
+              "tertiary-fixed": "#ffdad4",
+              "inverse-on-surface": "#f5f0e7",
+              surface: "#fdf9f0",
+              "surface-container-low": "#f7f3ea",
+              "surface-bright": "#fdf9f0",
+              "on-error": "#ffffff",
+              "secondary-fixed-dim": "#c8c6c2",
+              error: "#ba1a1a",
+              "tertiary-container": "#410000",
+              "on-primary-container": "#858383",
+              secondary: "#5e5e5b",
+              "on-error-container": "#93000a",
+            },
+            borderRadius: {
+              DEFAULT: "0px",
+              lg: "0px",
+              xl: "0px",
+              full: "9999px",
+            },
+            spacing: {
+              "grid-margin": "64px",
+              "bento-gap": "24px",
+              unit: "8px",
+              "grid-gutter": "1px",
+              "container-padding": "32px",
+            },
+            fontFamily: {
+              "body-md": ["Inter"],
+              "display-2xl": ["Bodoni Moda"],
+              "label-caps": ["Inter"],
+              "body-lg": ["Inter"],
+              "nav-link": ["Inter"],
+              "display-lg": ["Bodoni Moda"],
+              "headline-md": ["Bodoni Moda"],
+              "display-lg-mobile": ["Bodoni Moda"],
+              headline: ["Bodoni Moda"],
+              display: ["Bodoni Moda"],
+              body: ["Inter"],
+              label: ["Inter"],
+            },
+            fontSize: {
+              "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+              "display-2xl": [
+                "120px",
+                {
+                  lineHeight: "110px",
+                  letterSpacing: "-0.04em",
+                  fontWeight: "700",
+                },
+              ],
+              "label-caps": [
+                "12px",
+                {
+                  lineHeight: "16px",
+                  letterSpacing: "0.1em",
+                  fontWeight: "600",
+                },
+              ],
+              "body-lg": [
+                "18px",
+                {
+                  lineHeight: "28px",
+                  letterSpacing: "0.01em",
+                  fontWeight: "400",
+                },
+              ],
+              "nav-link": [
+                "14px",
+                {
+                  lineHeight: "20px",
+                  letterSpacing: "0.05em",
+                  fontWeight: "500",
+                },
+              ],
+              "display-lg": [
+                "72px",
+                {
+                  lineHeight: "76px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "600",
+                },
+              ],
+              "headline-md": [
+                "32px",
+                { lineHeight: "40px", fontWeight: "500" },
+              ],
+              "display-lg-mobile": [
+                "48px",
+                {
+                  lineHeight: "52px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "600",
+                },
+              ],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      .bento-border {
+        border: 1px solid theme("colors.outline-variant");
+      }
+      .bento-cell {
+        transition: background-color 400ms ease;
+      }
+      .bento-cell:hover {
+        background-color: theme("colors.surface-container-low");
+      }
+      .nav-active::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -6px;
+        height: 1px;
+        background: theme("colors.on-tertiary-container");
+      }
+      .bento-image-cell {
+        border: 1px solid theme("colors.outline-variant");
+      }
+      .reveal {
+        opacity: 0;
+        transform: translateY(32px);
+        transition:
+          opacity 1600ms cubic-bezier(0.16, 1, 0.3, 1),
+          transform 1600ms cubic-bezier(0.16, 1, 0.3, 1);
+        transition-delay: var(--reveal-delay, 0ms);
+      }
+      .reveal.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          animation-duration: 0.001ms !important;
+          transition-duration: 0.001ms !important;
+        }
+      }
+    </style>
+  </head>
+  <body
+    class="bg-background text-on-background antialiased selection:bg-tertiary-fixed-dim selection:text-primary"
+  >
+    <!-- TopNavBar -->
+    <nav
+      class="bg-background/85 backdrop-blur-md border-b border-outline-variant fixed top-0 left-0 right-0 z-50 h-20"
+    >
+      <div
+        class="max-w-[1200px] mx-auto px-grid-margin h-full flex justify-between items-center"
+      >
+        <a
+          class="font-display-lg text-headline-md uppercase tracking-[0em] text-primary"
+          href="index.html"
+          >KELLY WANG</a
+        >
+        <div class="hidden md:flex gap-10 items-center">
+          <a
+            class="relative font-label-caps text-nav-link uppercase tracking-widest text-on-surface-variant hover:text-on-tertiary-container transition-colors duration-300"
+            href="index.html"
+            >HOME</a
+          >
+          <a
+            class="relative font-label-caps text-nav-link uppercase tracking-widest text-on-surface-variant hover:text-on-tertiary-container transition-colors duration-300"
+            href="about.html"
+            >ABOUT ME</a
+          >
+          <a
+            class="relative font-label-caps text-nav-link uppercase tracking-widest text-primary hover:text-on-tertiary-container transition-colors duration-300 nav-active"
+            href="work.html"
+            >WORKS</a
+          >
+        </div>
+        <div class="flex items-center gap-4">
+          <a
+          class="hidden md:inline-block font-label-caps text-label-caps uppercase bg-primary text-on-primary px-6 py-3 hover:bg-on-tertiary-container transition-colors duration-300 whitespace-nowrap"
+          href="mailto:nnnvywang@gmail.com"
+          >CONTACT</a
+        >
+          <button
+            id="mobile-menu-toggle"
+            class="md:hidden flex items-center justify-center text-primary"
+            aria-label="Toggle menu"
+            aria-expanded="false"
+          >
+            <span class="material-symbols-outlined">menu</span>
+          </button>
+        </div>
+      </div>
+    
+      <div
+        id="mobile-menu-panel"
+        class="hidden md:hidden flex-col items-start gap-6 px-grid-margin py-8 bg-background border-t border-outline-variant absolute top-20 left-0 right-0"
+      >
+          <a
+            class="relative font-label-caps text-nav-link uppercase tracking-widest text-on-surface-variant hover:text-on-tertiary-container transition-colors duration-300"
+            href="index.html"
+            >HOME</a
+          >
+          <a
+            class="relative font-label-caps text-nav-link uppercase tracking-widest text-on-surface-variant hover:text-on-tertiary-container transition-colors duration-300"
+            href="about.html"
+            >ABOUT ME</a
+          >
+          <a
+            class="relative font-label-caps text-nav-link uppercase tracking-widest text-primary hover:text-on-tertiary-container transition-colors duration-300 nav-active"
+            href="work.html"
+            >WORKS</a
+          >
+          <a
+            class="mobile-menu-cta font-label-caps text-label-caps uppercase bg-primary text-on-primary px-6 py-3 hover:bg-on-tertiary-container transition-colors duration-300 mt-2"
+            href="mailto:nnnvywang@gmail.com"
+            >CONTACT</a
+          >
+        </div>
+    </nav>
+    <!-- Main Content -->
+    <main class="flex-grow pt-32 pb-24">
+      <div class="max-w-[1200px] mx-auto px-grid-margin w-full">
+        <!-- Top Section: Split Layout -->
+        <!-- 電腦版改用 grid：標題獨佔第一列，右側資訊與段落同列起始，頂端對齊段落第一行 -->
+        <div
+          class="flex flex-col gap-bento-gap mb-[80px] md:grid md:grid-cols-2 md:gap-y-0"
+        >
+          <!-- Left: Title & Description -->
+          <div class="md:contents">
+            <h1
+              class="reveal font-display-lg text-display-lg mb-8 md:col-start-1 md:row-start-1"
+              data-reveal="load"
+              style="--reveal-delay: 120ms"
+            >
+              23.5°N
+            </h1>
+            <p
+              class="reveal font-body-lg text-body-lg text-on-surface-variant md:col-start-1 md:row-start-2"
+              style="line-height: 1.9; letter-spacing: 0.05em; --reveal-delay: 400ms"
+              data-reveal="load"
+            >
+              為天然保養品牌「23.5 °N」統籌全通路的品牌視覺體系。<br>獨立主導商業情境攝影，並全面貫穿於實體專櫃、活動包裝、行銷宣傳至電商頁面，在維持純淨溫和的品牌調性下，串聯線上線下一致的消費體驗。
+            </p>
+          </div>
+          <!-- Right: Metadata -->
+          <div
+            class="reveal flex flex-col items-end md:col-start-2 md:row-start-2 md:self-start md:justify-self-end md:mt-[3px]"
+            data-reveal="load"
+            style="--reveal-delay: 640ms"
+          >
+            <div class="grid grid-cols-2 gap-y-8 gap-x-20">
+              <div>
+                <div
+                  class="font-label-caps text-label-caps text-on-surface-variant mb-2 uppercase tracking-widest"
+                >
+                  COMPANY
+                </div>
+                <div class="font-body-md text-body-md">23.5°N</div>
+              </div>
+              <div>
+                <div
+                  class="font-label-caps text-label-caps text-on-surface-variant mb-2 uppercase tracking-widest"
+                >
+                  DESIGN YEAR
+                </div>
+                <div class="font-body-md text-body-md">2013-2018</div>
+              </div>
+              <div>
+                <div
+                  class="font-label-caps text-label-caps text-on-surface-variant mb-2 uppercase tracking-widest"
+                >
+                  ROLE
+                </div>
+                <div class="font-body-md text-body-md">Visual Designer</div>
+              </div>
+              <div>
+                <div
+                  class="font-label-caps text-label-caps text-on-surface-variant mb-2 uppercase tracking-widest"
+                >
+                  Skill Tools
+                </div>
+                <div class="font-body-md text-body-md">Illustrator<br>Photoshop</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Middle Section: Showcase Image -->
+        <p
+          class="reveal font-body-md text-on-surface-variant text-left mb-3"
+          style="font-size: 12pt"
+          data-reveal="scroll"
+        >
+          <span class="font-bold">商業情境拍攝企劃</span> ｜ 統籌道具陳列與視覺構圖引導，與攝影師協同打造品牌調性畫面。
+        </p>
+        <div
+          class="reveal bento-image-cell w-full mb-bento-gap overflow-hidden"
+          data-reveal="scroll"
+        >
+          <picture>
+            <source media="(max-width: 767px)" srcset="assets/images/MB_23.5-1.png" />
+            <img
+              class="w-full h-auto block"
+              src="assets/images/23.5-1.png"
+            />
+          </picture>
+        </div>
+        <!-- Middle Section: Showcase Image -1 -->
+        <div
+          class="reveal bento-image-cell w-full mb-16 overflow-hidden"
+          data-reveal="scroll"
+        >
+          <picture>
+            <source media="(max-width: 767px)" srcset="assets/images/MB_23.5-1-1.png" />
+            <img
+              class="w-full h-auto block"
+              src="assets/images/23.5-1-1.png"
+            />
+          </picture>
+        </div>
+        <!-- Middle Section: Additional Showcase Image 1 -->
+        <p
+          class="reveal font-body-md text-on-surface-variant text-left mb-3"
+          style="font-size: 12pt"
+          data-reveal="scroll"
+        >
+          <span class="font-bold">電商檔期與行銷宣傳設計</span> ｜ 整合線上活動 Landing Page 與行銷專刊，以清晰資訊階層強化品牌溝通與促購轉換。
+        </p>
+        <div
+          class="reveal bento-image-cell w-full mb-bento-gap overflow-hidden"
+          data-reveal="scroll"
+        >
+          <picture>
+            <source media="(max-width: 767px)" srcset="assets/images/MB_23.5-2.png" />
+            <img
+              alt=""
+              class="w-full h-auto block"
+              src="assets/images/23.5-2.png"
+            />
+          </picture>
+        </div>
+        <!-- Middle Section: Additional Showcase Image 2 -->
+        <div
+          class="reveal bento-image-cell w-full mb-bento-gap overflow-hidden"
+          data-reveal="scroll"
+        >
+          <picture>
+            <source media="(max-width: 767px)" srcset="assets/images/MB_23.5-3.png" />
+            <img
+              alt=""
+              class="w-full h-auto block"
+              src="assets/images/23.5-3.png"
+            />
+          </picture>
+        </div>
+        <!-- Bottom Section: More Projects -->
+        <div class="mt-24">
+          <div class="w-full border-t border-outline-variant mb-8"></div>
+          <div
+            class="reveal flex justify-between items-end mb-8 border-outline-variant"
+            data-reveal="scroll"
+          >
+            <h2 class="font-headline-md text-headline-md">More Projects</h2>
+            <a
+              class="inline-flex items-center space-x-2 font-label-caps text-label-caps uppercase border-b border-primary pb-1 hover:text-on-tertiary-container hover:border-on-tertiary-container transition-colors"
+              href="work.html"
+            >
+              <span>SEE ALL WORKS</span>
+              <span class="material-symbols-outlined text-sm">arrow_forward</span>
+            </a>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-bento-gap">
+            <!-- Project Card 1 -->
+            <a
+              href="UIUX_papawash.html"
+              class="reveal col-span-1 group cursor-pointer relative overflow-hidden aspect-square bg-primary p-container-padding flex flex-col justify-between bento-border"
+              data-reveal="scroll"
+            >
+              <div class="relative z-10 flex justify-between items-start">
+                <span class="font-headline-md text-headline-md text-on-primary"></span>
+                <div class="text-right">
+                  <h3 class="font-label-caps text-[16px] leading-[21px] font-semibold tracking-[0.1em] text-primary mb-1 uppercase">
+                    PAPAWASH
+                  </h3>
+                  <p class="font-body-md text-[12px] leading-[18px] font-normal text-on-surface-variant">
+                    UI / UX
+                  </p>
+                </div>
+              </div>
+              <div class="absolute inset-0 z-0">
+                <img
+                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  src="assets/images/1.png"
+                />
+              </div>
+            </a>
+            <!-- Project Card 2 -->
+            <a
+              href="Frontend_Cosmic.html"
+              class="reveal col-span-1 group cursor-pointer relative overflow-hidden aspect-square bg-on-tertiary-container p-container-padding flex flex-col justify-between bento-border"
+              data-reveal="scroll"
+              style="--reveal-delay: 140ms"
+            >
+              <div class="relative z-10 flex justify-between items-start">
+                <span class="font-headline-md text-headline-md text-on-primary"></span>
+                <div class="text-right">
+                  <h3 class="font-label-caps text-[16px] leading-[21px] font-semibold tracking-[0.1em] text-primary mb-1 uppercase">
+                    COSMIC FATES
+                  </h3>
+                  <p class="font-body-md text-[12px] leading-[18px] font-normal text-on-surface-variant">
+                    FRONT-END
+                  </p>
+                </div>
+              </div>
+              <div class="absolute inset-0 z-0">
+                <img
+                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  src="assets/images/2.png"
+                />
+              </div>
+            </a>
+            <!-- Project Card 3 -->
+            <a
+              href="EC_ysdt.html"
+              class="reveal col-span-1 group cursor-pointer relative overflow-hidden aspect-square bg-surface-container-high p-container-padding flex flex-col justify-between bento-border"
+              data-reveal="scroll"
+              style="--reveal-delay: 280ms"
+            >
+              <div class="relative z-10 flex justify-between items-start">
+                <span class="font-headline-md text-headline-md text-primary"></span>
+                <div class="text-right">
+                  <h3 class="font-label-caps text-[16px] leading-[21px] font-semibold tracking-[0.1em] text-primary mb-1 uppercase">
+                    friday購物
+                  </h3>
+                  <p class="font-body-md text-[12px] leading-[18px] font-normal text-on-surface-variant">
+                    EC BANNER
+                  </p>
+                </div>
+              </div>
+              <div class="absolute inset-0 z-0">
+                <img
+                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  src="assets/images/3.png"
+                />
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </main>
+    <!-- Footer -->
+    <footer class="w-full border-t border-outline-variant bg-background">
+      <div class="max-w-[1200px] mx-auto px-grid-margin py-container-padding flex justify-center">
+        <p
+          class="font-body-md text-on-surface-variant uppercase tracking-widest text-center"
+          style="font-size: 0.85rem"
+        >
+          © 2026 KELLY WANG. ALL RIGHTS RESERVED.
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        document.querySelectorAll('[data-reveal="load"]').forEach((el) => {
+          requestAnimationFrame(() => el.classList.add("is-visible"));
+        });
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.15, rootMargin: "0px 0px -80px 0px" }
+        );
+
+        document.querySelectorAll('[data-reveal="scroll"]').forEach((el) => {
+          observer.observe(el);
+        });
+
+        // Mobile nav menu toggle
+        const mobileMenuToggle = document.getElementById("mobile-menu-toggle");
+        const mobileMenuPanel = document.getElementById("mobile-menu-panel");
+        if (mobileMenuToggle && mobileMenuPanel) {
+          const closeMobileMenu = () => {
+            mobileMenuPanel.classList.add("hidden");
+            mobileMenuPanel.classList.remove("flex");
+            mobileMenuToggle.setAttribute("aria-expanded", "false");
+            mobileMenuToggle.querySelector(".material-symbols-outlined").textContent =
+              "menu";
+          };
+          mobileMenuToggle.addEventListener("click", () => {
+            const opening = mobileMenuPanel.classList.contains("hidden");
+            mobileMenuPanel.classList.toggle("hidden", !opening);
+            mobileMenuPanel.classList.toggle("flex", opening);
+            mobileMenuToggle.setAttribute("aria-expanded", String(opening));
+            mobileMenuToggle.querySelector(".material-symbols-outlined").textContent =
+              opening ? "close" : "menu";
+          });
+          mobileMenuPanel.querySelectorAll("a").forEach((link) => {
+            link.addEventListener("click", closeMobileMenu);
+          });
+        }
+      });
+    </script>
+  </body>
+</html>

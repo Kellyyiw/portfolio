@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>7天儲食清單</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+  }
+  /* 底圖只在 body 宣告一次，版頭、促銷橫幅、主體全部共用同一層背景。
+     不再各自分開宣告 background-image，所以三個區塊之間根本不存在「界線」──
+     KV.jpg 大圖、促銷格、商品卡片都只是疊在這唯一一層固定背景之上的內容，
+     background-attachment:fixed 讓它跟著視窗走，不受任何區塊位移影響。
+     這裡用 KV-wood-tile.jpg（從 KV.aa616486.jpg 下半部裁掉「To buy list」
+     文字後的乾淨木紋）來重複鋪滿，避免那行字跟著背景一起重複出現在整頁 */
+  body {
+    background-image: url(assets/KV-wood-tile.jpg);
+    background-repeat: repeat;
+    background-attachment: fixed;
+    background-position: top center;
+  }
+  main {
+    position: relative;
+    overflow-x: hidden;
+  }
+  img {
+    max-width: 100%;
+  }
+
+  /* ===== Hero / 版頭動態效果 =====
+     .hero 本身不設背景、不設 z-index（不建立新的堆疊層級），底圖交給 body 統一處理。
+     這樣版頭裡的 KV.jpg 大圖才不會蓋住上移後的促銷區塊；只有 .fork-deco / .spoon-deco
+     另外指定較高的 z-index，讓「叉子/湯匙」這兩個裝飾圖能單獨蓋在促銷區塊之上 */
+  .hero {
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-inner {
+    position: relative;
+    line-height: 0; /* 消除 inline img 底部空隙 */
+  }
+
+  /* 桌機 / 手機切換 */
+  .hero-desktop { display: none; }
+  .hero-mobile { display: block; }
+  @media (min-width: 992px) {
+    .hero-desktop {
+      display: block;
+      /* 預留空間讓叉子/湯匙裝飾圖完整露出，避免被 .hero 的 overflow:hidden 裁切 */
+      padding-bottom: 6%;
+    }
+    .hero-mobile { display: none; }
+  }
+
+  /* 左右角落裝飾（叉子 / 湯匙）－ 位置與尺寸照 Old_index.html 原始 CSS
+     z-index 特別調高，確保疊到促銷區塊上方時完整可見、不被蓋住 */
+  .fork-deco,
+  .spoon-deco {
+    position: absolute;
+    bottom: -10%;
+    width: 150px;
+    pointer-events: none;
+    z-index: 10;
+  }
+  /* 往外推到促銷區塊兩側的空白處，避免壓到行銷標 */
+  .fork-deco { left: -4.5%; }
+  .spoon-deco { right: -4.5%; }
+  .fork-deco, .spoon-deco { width: 110px; }
+  @media (min-width: 1180px) {
+    .fork-deco, .spoon-deco { width: 140px; }
+  }
+  @media (min-width: 1500px) {
+    .fork-deco, .spoon-deco { width: auto; }
+  }
+
+  /* 建立整個版頭高度的主圖 */
+  .banner-photo,
+  .banner-photo-m {
+    display: block;
+    width: 100%;
+  }
+
+  /* 中央置頂的裝飾圖 */
+  .banner-image,
+  .banner-m-image {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+    pointer-events: none;
+  }
+  .banner-image {
+    top: 35%;
+    width: 30%;
+  }
+  @media (min-width: 2200px) {
+    .banner-image { width: 25%; }
+  }
+  .banner-m-image {
+    top: 25%;
+    width: 50%;
+  }
+
+  /* 漂浮食材動畫項目 */
+  .item {
+    position: absolute;
+    top: 17%;
+    width: 35%;
+    z-index: 3;
+    pointer-events: none;
+  }
+  @media (min-width: 992px) {
+    .item {
+      top: 20%;
+      width: 20%;
+    }
+  }
+  .item img {
+    display: block;
+    width: 100%;
+  }
+
+  /* 桌機版：11 組食材，16 秒無限循環，彼此以不同起始位置錯開 */
+  .foodmove1  { animation: bannermove1  16s linear infinite; }
+  .foodmove2  { animation: bannermove2  16s linear infinite; }
+  .foodmove3  { animation: bannermove3  16s linear infinite; }
+  .foodmove4  { animation: bannermove4  16s linear infinite; }
+  .foodmove5  { animation: bannermove5  16s linear infinite; }
+  .foodmove6  { animation: bannermove6  16s linear infinite; }
+  .foodmove7  { animation: bannermove7  16s linear infinite; }
+  .foodmove8  { animation: bannermove8  16s linear infinite; }
+  .foodmove9  { animation: bannermove9  16s linear infinite; }
+  .foodmove10 { animation: bannermove10 16s linear infinite; }
+  .foodmove11 { animation: bannermove11 16s linear infinite; }
+
+  @keyframes bannermove1  { 0%{left:-5%;transform:translateY(10rem)} 17%{left:-25%;transform:translateY(18rem)} 33%{left:-50%;transform:translateY(26rem)} 50%{left:-75%;transform:translateY(34rem)} 67%{left:-100%;transform:translateY(42rem)} 83%{left:-125%;transform:translateY(50rem)} 100%{left:-150%;transform:translateY(58rem)} }
+  @keyframes bannermove2  { 0%{left:15%;transform:translateY(0)} 17%{left:-5%;transform:translateY(10rem)} 33%{left:-25%;transform:translateY(18rem)} 50%{left:-50%;transform:translateY(26rem)} 67%{left:-75%;transform:translateY(34rem)} 83%{left:-100%;transform:translateY(42rem)} 100%{left:-125%;transform:translateY(50rem)} }
+  @keyframes bannermove3  { 0%{left:40%;transform:translateY(-2rem)} 17%{left:15%;transform:translateY(0)} 33%{left:-5%;transform:translateY(10rem)} 50%{left:-25%;transform:translateY(18rem)} 67%{left:-50%;transform:translateY(26rem)} 83%{left:-75%;transform:translateY(34rem)} 100%{left:-100%;transform:translateY(42rem)} }
+  @keyframes bannermove4  { 0%{left:65%;transform:translateY(0)} 17%{left:40%;transform:translateY(-2rem)} 33%{left:15%;transform:translateY(0)} 50%{left:-5%;transform:translateY(10rem)} 67%{left:-25%;transform:translateY(18rem)} 83%{left:-50%;transform:translateY(26rem)} 100%{left:-75%;transform:translateY(34rem)} }
+  @keyframes bannermove5  { 0%{left:85%;transform:translateY(10rem)} 17%{left:65%;transform:translateY(0)} 33%{left:40%;transform:translateY(-2rem)} 50%{left:15%;transform:translateY(0)} 67%{left:-5%;transform:translateY(10rem)} 83%{left:-25%;transform:translateY(18rem)} 100%{left:-50%;transform:translateY(26rem)} }
+  @keyframes bannermove6  { 0%{left:105%;transform:translateY(18rem)} 17%{left:85%;transform:translateY(10rem)} 33%{left:65%;transform:translateY(0)} 50%{left:40%;transform:translateY(-2rem)} 67%{left:15%;transform:translateY(0)} 83%{left:-5%;transform:translateY(10rem)} 100%{left:-25%;transform:translateY(18rem)} }
+  @keyframes bannermove7  { 0%{left:125%;transform:translateY(26rem)} 17%{left:105%;transform:translateY(18rem)} 33%{left:85%;transform:translateY(10rem)} 50%{left:65%;transform:translateY(0)} 67%{left:40%;transform:translateY(-2rem)} 83%{left:15%;transform:translateY(0)} 100%{left:-5%;transform:translateY(10rem)} }
+  @keyframes bannermove8  { 0%{left:145%;transform:translateY(34rem)} 17%{left:125%;transform:translateY(26rem)} 33%{left:105%;transform:translateY(18rem)} 50%{left:85%;transform:translateY(10rem)} 67%{left:65%;transform:translateY(0)} 83%{left:40%;transform:translateY(-2rem)} 100%{left:15%;transform:translateY(0)} }
+  @keyframes bannermove9  { 0%{left:165%;transform:translateY(42rem)} 17%{left:145%;transform:translateY(34rem)} 33%{left:125%;transform:translateY(26rem)} 50%{left:105%;transform:translateY(18rem)} 67%{left:85%;transform:translateY(10rem)} 83%{left:65%;transform:translateY(0)} 100%{left:40%;transform:translateY(-2rem)} }
+  @keyframes bannermove10 { 0%{left:185%;transform:translateY(50rem)} 17%{left:165%;transform:translateY(42rem)} 33%{left:145%;transform:translateY(34rem)} 50%{left:125%;transform:translateY(26rem)} 67%{left:105%;transform:translateY(18rem)} 83%{left:85%;transform:translateY(10rem)} 100%{left:65%;transform:translateY(0)} }
+  @keyframes bannermove11 { 0%{left:205%;transform:translateY(58rem)} 17%{left:185%;transform:translateY(50rem)} 33%{left:165%;transform:translateY(42rem)} 50%{left:145%;transform:translateY(34rem)} 67%{left:125%;transform:translateY(26rem)} 83%{left:105%;transform:translateY(18rem)} 100%{left:85%;transform:translateY(10rem)} }
+
+  /* 手機版：10 組食材 */
+  .foodmove1_m  { animation: bannermove1_m  16s linear infinite; }
+  .foodmove2_m  { animation: bannermove2_m  16s linear infinite; }
+  .foodmove3_m  { animation: bannermove3_m  16s linear infinite; }
+  .foodmove4_m  { animation: bannermove4_m  16s linear infinite; }
+  .foodmove5_m  { animation: bannermove5_m  16s linear infinite; }
+  .foodmove6_m  { animation: bannermove6_m  16s linear infinite; }
+  .foodmove7_m  { animation: bannermove7_m  16s linear infinite; }
+  .foodmove8_m  { animation: bannermove8_m  16s linear infinite; }
+  .foodmove9_m  { animation: bannermove9_m  16s linear infinite; }
+  .foodmove10_m { animation: bannermove10_m 16s linear infinite; }
+
+  @keyframes bannermove1_m  { 0%{left:-5%;transform:translateY(3rem)} 17%{left:-45%;transform:translateY(12rem)} 33%{left:-75%;transform:translateY(18rem)} 50%{left:-105%;transform:translateY(24rem)} 67%{left:-140%;transform:translateY(30rem)} 83%{left:-175%;transform:translateY(36rem)} 100%{left:-210%;transform:translateY(42rem)} }
+  @keyframes bannermove2_m  { 0%{left:38%;transform:translateY(-2rem)} 17%{left:-5%;transform:translateY(3rem)} 33%{left:-40%;transform:translateY(12rem)} 50%{left:-75%;transform:translateY(18rem)} 67%{left:-105%;transform:translateY(24rem)} 83%{left:-140%;transform:translateY(30rem)} 100%{left:-175%;transform:translateY(36rem)} }
+  @keyframes bannermove3_m  { 0%{left:70%;transform:translateY(3rem)} 17%{left:38%;transform:translateY(-2rem)} 33%{left:-5%;transform:translateY(3rem)} 50%{left:-40%;transform:translateY(12rem)} 67%{left:-75%;transform:translateY(18rem)} 83%{left:-105%;transform:translateY(24rem)} 100%{left:-140%;transform:translateY(30rem)} }
+  @keyframes bannermove4_m  { 0%{left:105%;transform:translateY(12rem)} 17%{left:70%;transform:translateY(3rem)} 33%{left:38%;transform:translateY(-2rem)} 50%{left:-5%;transform:translateY(3rem)} 67%{left:-40%;transform:translateY(12rem)} 83%{left:-75%;transform:translateY(18rem)} 100%{left:-105%;transform:translateY(24rem)} }
+  @keyframes bannermove5_m  { 0%{left:140%;transform:translateY(18rem)} 17%{left:105%;transform:translateY(12rem)} 33%{left:70%;transform:translateY(3rem)} 50%{left:38%;transform:translateY(-2rem)} 67%{left:-5%;transform:translateY(3rem)} 83%{left:-40%;transform:translateY(12rem)} 100%{left:-75%;transform:translateY(18rem)} }
+  @keyframes bannermove6_m  { 0%{left:175%;transform:translateY(24rem)} 17%{left:140%;transform:translateY(18rem)} 33%{left:105%;transform:translateY(12rem)} 50%{left:70%;transform:translateY(3rem)} 67%{left:38%;transform:translateY(-2rem)} 83%{left:-5%;transform:translateY(3rem)} 100%{left:-40%;transform:translateY(12rem)} }
+  @keyframes bannermove7_m  { 0%{left:210%;transform:translateY(30rem)} 17%{left:175%;transform:translateY(24rem)} 33%{left:140%;transform:translateY(18rem)} 50%{left:105%;transform:translateY(12rem)} 67%{left:70%;transform:translateY(3rem)} 83%{left:38%;transform:translateY(-2rem)} 100%{left:-5%;transform:translateY(3rem)} }
+  @keyframes bannermove8_m  { 0%{left:245%;transform:translateY(36rem)} 17%{left:210%;transform:translateY(30rem)} 33%{left:170%;transform:translateY(24rem)} 50%{left:140%;transform:translateY(18rem)} 67%{left:105%;transform:translateY(12rem)} 83%{left:70%;transform:translateY(3rem)} 100%{left:38%;transform:translateY(-2rem)} }
+  @keyframes bannermove9_m  { 0%{left:280%;transform:translateY(42rem)} 17%{left:245%;transform:translateY(36rem)} 33%{left:210%;transform:translateY(30rem)} 50%{left:175%;transform:translateY(24rem)} 67%{left:140%;transform:translateY(18rem)} 83%{left:105%;transform:translateY(12rem)} 100%{left:70%;transform:translateY(3rem)} }
+  @keyframes bannermove10_m { 0%{left:315%;transform:translateY(48rem)} 17%{left:280%;transform:translateY(42rem)} 33%{left:245%;transform:translateY(36rem)} 50%{left:210%;transform:translateY(30rem)} 67%{left:175%;transform:translateY(24rem)} 83%{left:140%;transform:translateY(18rem)} 100%{left:105%;transform:translateY(12rem)} }
+
+  /* 動畫過多時尊重使用者的減少動態偏好設定 */
+  @media (prefers-reduced-motion: reduce) {
+    .item { animation: none !important; }
+  }
+
+  /* ===== 主體 Body 區塊：原始商品內容重建 ===== */
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  @media (min-width: 992px) {
+    .container { padding: 0 16px; }
+  }
+
+  .d-desktop { display: none !important; }
+  .d-mobile { display: block !important; }
+  @media (min-width: 992px) {
+    .d-desktop { display: block !important; }
+    .d-mobile { display: none !important; }
+  }
+
+  .topic-section { margin-top: 24px; }
+  @media (min-width: 992px) { .topic-section { margin-top: 48px; } }
+
+  .topic-title-link { display: block; }
+  .topic-title { display: block; width: 100%; }
+
+  .theme-panel {
+    padding: 0 8px;
+  }
+  @media (min-width: 992px) {
+    .theme-panel { padding: 0 38px; }
+  }
+
+  .inner-block {
+    background-color: #d0bca5;
+    padding: 16px 0 8px;
+  }
+  @media (min-width: 992px) {
+    .inner-block { padding: 38px 0; }
+  }
+
+  .theme-row {
+    padding: 0 8px;
+  }
+  @media (min-width: 992px) {
+    .theme-row {
+      display: flex;
+      align-items: stretch;
+      gap: 24px;
+      padding: 0 16px;
+    }
+  }
+
+  .image-block {
+    width: 100%;
+    margin-bottom: 12px;
+  }
+  @media (min-width: 992px) {
+    .image-block { width: 48%; flex: 0 0 48%; margin-bottom: 0; }
+  }
+  .image-block img { display: block; width: 100%; border-radius: 4px; }
+
+  .product-block {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  @media (min-width: 768px) {
+    .product-block { gap: 12px; }
+  }
+  @media (min-width: 992px) {
+    .product-block { width: auto; flex: 1 1 auto; gap: 16px; }
+  }
+
+  .product-card {
+    display: block;
+    text-decoration: none;
+    color: #000;
+    transition: transform .3s ease-in;
+  }
+  .product-card:hover { transform: translateY(-.5rem); }
+
+  .card {
+    background: #fff;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: .25rem .25rem 0 0;
+    padding: 8px 8px 0;
+    text-align: center;
+  }
+  @media (min-width: 992px) { .card { padding: 16px 16px 0; } }
+
+  .card-img-top { width: 100%; border-radius: 0; display: block; }
+
+  .card-body { padding: 8px 0 12px; overflow: hidden; }
+  @media (min-width: 992px) { .card-body { padding: 12px 0 16px; } }
+
+  .card-title {
+    height: 3em;
+    overflow: hidden;
+    line-height: 1.5;
+    font-size: .8rem;
+    margin: 0 0 8px;
+    font-weight: 600;
+  }
+  @media (min-width: 576px) { .card-title { font-size: .95rem; } }
+
+  .card-price { margin: 0; font-size: .8rem; white-space: nowrap; }
+  @media (min-width: 576px) { .card-price { font-size: .95rem; } }
+  .prd-msrp { color: #000; text-decoration: line-through; margin-right: 8px; }
+  .price-color { color: #f8412e; }
+  .price-num { font-size: 1.3em; }
+
+  .cta-bar {
+    margin: 0;
+    text-align: center;
+    color: #fff;
+    padding: 4px 0;
+    font-size: .95rem;
+  }
+  @media (min-width: 768px) { .cta-bar { padding: 8px 0; font-size: 1.1rem; } }
+
+  .deco-bottom { display: block; width: 100%; }
+
+  .more-button { text-align: center; padding: 24px 0 48px; }
+  @media (min-width: 992px) { .more-button { padding: 32px 0 72px; } }
+  .more-button img { display: inline-block; max-width: 220px; width: 40%; }
+
+  /* ===== 版頭下方促銷橫幅區塊（activity1~4 / activity1~4_mb） ===== */
+  .top-promo {
+    padding: 16px 0;
+    position: relative;
+    z-index: 2;
+    /* 手機版：讓促銷區塊上緣落在 banner-m-image（KV_1.47c7fe03.png，top:25%、寬50%）
+       下緣往下 50px 處，距離跟桌機版一致。banner-m-image 底緣 ≈ 53.25% 版頭寬度、
+       手機版 .hero-mobile 總高度（KVmb.jpg 長寬比 992:1121）≈ 113% 版頭寬度 */
+    margin-top: calc(-59.75% + 50px);
+  }
+  @media (min-width: 992px) {
+    .top-promo {
+      padding: 24px 0;
+      /* 桌機版：讓促銷區塊上緣落在 KV_1.47c7fe03.png（banner-image：top:35%、寬30%的圓形徽章）
+         下緣往下 50px 處。banner-image 底緣 ≈ 33.5% 版頭寬度、.hero-desktop 總高度
+         （含 padding-bottom:6%）≈ 58.9% 版頭寬度，兩者相減再用 calc() 加回固定 50px，
+         不管螢幕多寬，促銷區塊上緣都精準落在徽章下方 50px；背景本身用
+         background-attachment:fixed 固定，不受此位移影響 */
+      margin-top: calc(-25.4% + 50px);
+    }
+  }
+
+  .top-promo-desktop { display: none; }
+  .top-promo-mobile {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  @media (min-width: 992px) {
+    /* 參考 assets/參考.jpg：左二欄各放一張寬版banner，第三欄由兩張窄banner上下疊放
+       整體再縮小10%（95% -> 85.5%）並置中，背景（.top-promo 本身）不受影響 */
+    .top-promo-desktop {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+      align-items: start;
+      width: 85.5%;
+      margin: 0 auto;
+    }
+    .top-promo-mobile { display: none; }
+  }
+
+  .top-promo-item {
+    display: block;
+    transition: transform .3s ease-in;
+  }
+  .top-promo-item:hover { transform: translateY(-.5rem); }
+  .top-promo-item img {
+    display: block;
+    width: 100%;
+    border-radius: 8px;
+  }
+
+  .top-promo-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+</style>
+</head>
+<body>
+
+  <!-- 版頭 Hero 區塊：動態效果 -->
+  <header class="hero">
+    <!-- 桌機版 -->
+    <div class="hero-desktop">
+      <div class="hero-inner">
+        <img class="banner-image" src="assets/KV_1.47c7fe03.png" alt="banner">
+
+        <div class="item foodmove1"><img src="assets/KVfood-1.0247ecb1.png" alt="food"></div>
+        <div class="item foodmove2"><img src="assets/KVfood-2.5f49070e.png" alt="food"></div>
+        <div class="item foodmove3"><img src="assets/KVfood-3.7f94723d.png" alt="food"></div>
+        <div class="item foodmove4"><img src="assets/KVfood-4.76964f8d.png" alt="food"></div>
+        <div class="item foodmove5"><img src="assets/KVfood-5.381d81a9.png" alt="food"></div>
+        <div class="item foodmove6"><img src="assets/KVfood-6.386dfa2f.png" alt="food"></div>
+        <div class="item foodmove7"><img src="assets/KVfood-1.0247ecb1.png" alt="food"></div>
+        <div class="item foodmove8"><img src="assets/KVfood-2.5f49070e.png" alt="food"></div>
+        <div class="item foodmove9"><img src="assets/KVfood-3.7f94723d.png" alt="food"></div>
+        <div class="item foodmove10"><img src="assets/KVfood-4.76964f8d.png" alt="food"></div>
+        <div class="item foodmove11"><img src="assets/KVfood-5.381d81a9.png" alt="food"></div>
+
+        <img class="banner-photo" src="assets/KV.aa616486.jpg" alt="banner">
+
+        <img class="fork-deco" src="assets/KVbgdeco-1.ba07394a.png" alt="">
+        <img class="spoon-deco" src="assets/KVbgdeco-2.ac0698fa.png" alt="">
+      </div>
+    </div>
+
+    <!-- 手機版 -->
+    <div class="hero-mobile">
+      <div class="hero-inner">
+        <img class="banner-photo-m" src="assets/KVmb.6e731a99.jpg" alt="banner">
+        <img class="banner-m-image" src="assets/KV_1.47c7fe03.png" alt="banner">
+
+        <div class="item foodmove1_m"><img src="assets/KVfood-1.0247ecb1.png" alt="food"></div>
+        <div class="item foodmove2_m"><img src="assets/KVfood-2.5f49070e.png" alt="food"></div>
+        <div class="item foodmove3_m"><img src="assets/KVfood-3.7f94723d.png" alt="food"></div>
+        <div class="item foodmove4_m"><img src="assets/KVfood-4.76964f8d.png" alt="food"></div>
+        <div class="item foodmove5_m"><img src="assets/KVfood-5.381d81a9.png" alt="food"></div>
+        <div class="item foodmove6_m"><img src="assets/KVfood-6.386dfa2f.png" alt="food"></div>
+        <div class="item foodmove7_m"><img src="assets/KVfood-1.0247ecb1.png" alt="food"></div>
+        <div class="item foodmove8_m"><img src="assets/KVfood-2.5f49070e.png" alt="food"></div>
+        <div class="item foodmove9_m"><img src="assets/KVfood-3.7f94723d.png" alt="food"></div>
+        <div class="item foodmove10_m"><img src="assets/KVfood-4.76964f8d.png" alt="food"></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- 版頭下方促銷橫幅（電腦版 activity1~4 / 手機版 activity1~4_mb） -->
+  <div class="top-promo">
+    <div class="container">
+      <div class="top-promo-desktop">
+        <div class="top-promo-item">
+          <img src="assets/activity1.png" alt="安心好食節 爆品3折up">
+        </div>
+        <div class="top-promo-item">
+          <img src="assets/activity2.png" alt="防疫大補帖 食刻支援你">
+        </div>
+        <div class="top-promo-stack">
+          <div class="top-promo-item">
+            <img src="assets/activity3.png" alt="筆筆回饋10%">
+          </div>
+          <div class="top-promo-item">
+            <img src="assets/activity4.png" alt="新會員領神券">
+          </div>
+        </div>
+      </div>
+      <div class="top-promo-mobile">
+        <div class="top-promo-item">
+          <img src="assets/activity1_mb.png" alt="安心好食節 爆品3折up">
+        </div>
+        <div class="top-promo-item">
+          <img src="assets/activity2_mb.png" alt="防疫大補帖 食刻支援你">
+        </div>
+        <div class="top-promo-item">
+          <img src="assets/activity3_mb.png" alt="筆筆回饋10%">
+        </div>
+        <div class="top-promo-item">
+          <img src="assets/activity4_mb.png" alt="新會員領神券">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 主體 Body 區塊：原始商品內容（6 大主題 x 4 項商品） -->
+  <main>
+    <section class="topic-section">
+      <div class="container">
+        <div class="topic-title-link">
+          <img src="assets/Topic1up.e2bad13e.png" alt="蔬菜生鮮專區" class="topic-title d-desktop">
+          <img src="assets/Topic1upmb.82216696.png" alt="蔬菜生鮮專區" class="topic-title d-mobile">
+        </div>
+        <div class="theme-panel" style="background-color:#5a6932">
+          <div class="inner-block">
+            <div class="theme-row">
+              <div class="image-block">
+                <img src="assets/20220608153500.jpg" alt="蔬菜生鮮專區" class="d-desktop">
+                <img src="assets/20220608153121.jpg" alt="蔬菜生鮮專區" class="d-mobile">
+              </div>
+              <div class="product-block">
+            <div class="product-card">
+              <div class="card">
+                <img src="assets/P220601000008.jpg" class="card-img-top" alt="product image" loading="lazy">
+                <div class="card-body">
+                  <h5 class="card-title">【麻豆區農會】BOSS嚴選蔬菜箱</h5>
+                  <p class="card-price"><del class="prd-msrp">$990</del>特價<span class="price-color">$<span class="price-num">648</span></span></p>
+                </div>
+              </div>
+              <p class="cta-bar" style="background:#5a6932">立即搶購</p>
+            </div>
+            <div class="product-card">
+              <div class="card">
+                <img src="assets/P220317000029.jpg" class="card-img-top" alt="product image" loading="lazy">
+                <div class="card-body">
+                  <h5 class="card-title">【斗南農會】斗南越光米嚴選箱</h5>
+                  <p class="card-price"><del class="prd-msrp">$999</del>特價<span class="price-color">$<span class="price-num">598</span></span></p>
+                </div>
+              </div>
+              <p class="cta-bar" style="background:#5a6932">立即搶購</p>
+            </div>
+            <div class="product-card">
+              <div class="card">
+                <img src="assets/P190415000001.jpg" class="card-img-top" alt="product image" loading="lazy">
+                <div class="card-body">
+                  <h5 class="card-title">【安康美之農】紅龍果10台斤-美濃農會推薦</h5>
+                  <p class="card-price"><del class="prd-msrp">$1,200</del>特價<span class="price-color">$<span class="price-num">890</span></span></p>
+                </div>
+              </div>
+              <p class="cta-bar" style="background:#5a6932">立即搶購</p>
+            </div>
+            <div class="product-card">
+              <div class="card">
+                <img src="assets/P220526000006.jpg" class="card-img-top" alt="product image" loading="lazy">
+                <div class="card-body">
+                  <h5 class="card-title">【雙北桃園當日配】專業農限量防疫安心果物號</h5>
+                  <p class="card-price"><del class="prd-msrp">$999</del>特價<span class="price-color">$<span class="price-num">793</span></span></p>
+                </div>
+              </div>
+              <p class="cta-bar" style="background:#5a6932">立即搶購</p>
+            </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <img src="assets/deco/bottom-vegetable-desktop.png" alt="" class="deco-bottom d-desktop">
+        <img src="assets/deco/bottom-vegetable-mobile.png" alt="" class="deco-bottom d-mobile">
+      </div>
+    </section>
+
+    <section class="topic-section">
+      <div class="container">
+        <div class="topic-title-link">
+          <img src="assets/Topic2up.07e706ab.png" alt="飲品專區" class="topic-title d-desktop">
+          <img src="assets/Topic2upmb.2885aac5.png" alt="飲品專區" class="topic-title d-mobile">
+        </div>
+        <div class="theme-panel" style="background-color:#856348">
+          <div class="inner-block">
+            <div class="theme-row">
+              <div class="image-block">
+                <img src="assets/20220608153047.jpg" alt="飲品專區" class="d-desktop">
+                <img src="assets/20220608154848.jpg" alt="飲品專區" class="d-mobile">
+              </div>
+              <div class="product-block">
+            <div class="product-card">
+              <div class="card">
+                <img src="assets/P220530000005.jpg" class="card-img-top" alt="product image" loading="lazy">
+                <div class="card-body">
+                  <h5 class="card-title">【老實農場】檸檬冰角/萊姆冰角X6袋(28mlX10入/袋)</h5>
+                  <p class="card-price"><del class="prd-msrp">$1,260</del>特價<span class="price-color">$<span class="price-num">899</span></span></p>
+                </div>
+              </div>
+              <p class="cta-bar" style="background:#856348">立即搶購</p>
+            </div>
+            <div class="product-card">
+              <div class="card">
+                <img src="assets/P220318000085.jpg" class="card-img-top" alt="product image" loading="lazy">
+                <div class="card-body">
+                  <h5 class="card-title">【關西仙草茶】仙草茶(960ml/瓶 共十二瓶)</h5>
+                  <p class="card-price"><del class="prd-msrp">$1,500</del>特價<span class="price-color">$<span class="price-num">660</span></span></p>
+                </div>
+              </div>
+              <p class="cta-bar" style="background:#856348">立即搶購</p>
+            </div>
+            <div class="product-card">
+              <div class="card">
+                <img src="assets/P211025000001.jpg" class="card-img-top" alt="product image" loading="lazy">
+                <div class="card-body">
+                  <h5 class="card-title">【法國沛綠雅】氣泡天然礦泉水鋁罐35入/箱</h5>
+                  <p class="card-price"><del class="prd-msrp">$1,298</del>特價<span class="price-color">$<span class="price-num">1,298</span></span></p>
+                </div>
+              </div>
+              <p class="cta-bar" style="background:#856348">立即搶購</p>
+            </div>
+            <div class="product-card">
+              <div class="card">
+                <img src="assets/P220314000054.jpg" class="card-img-top" alt="product image" loading="lazy">
+                <div class="card-body">
+                  <h5 class="card-title">【蜂蜜先生】陳釀蜂蜜醋+荔枝蜂蜜</h5>
+                  <p class="card-price"><del class="prd-msrp">$1,150</del>特價<span class="price-color">$<span class="price-num">1,045</span></span></p>
+                </div>
+              </div>
+              <p class="cta-bar" style="background:#856348">立即搶購</p>
+            </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <img src="assets/deco/bottom-drinks-desktop.png" alt="" class="deco-bottom d-desktop">
+        <img src="assets/deco/bottom-drinks-mobile.png" alt="" class="deco-bottom d-mobile">
+      </div>
+    </section>
+
+    <section class="topic-section">
+      <div class="container">
+        <div class="topic-title-link">
+          <img src="assets/Topic3up.03ffaea4.png" alt="肉品海鮮專區" class="topic-title d-desktop">
+          <img src="assets/Topic3upmb.d113dd41.png" alt="肉品海鮮專區" class="topic-title d-mobile">
+        </div>
+        <div class="theme-panel" style="background-color:#65261f">
+          <div class="inner-block">
+            <div class="theme-row">
+              <div class="image-block">
+                <img src="assets/20220608154157.jpg" alt="肉品海鮮專區" class="d-desktop">
+                <img src="assets/20220608154943.jpg" alt="肉品海鮮專區" class="d-mobile">
+              </div>
+              <div class="product-block">
+            <div class="product-card">
+              <div class="card">
+                <img src="assets/P220601000011.jpg" class="card-img-top" alt="product image" loading="lazy">
+                <div class="card-body">
+                  <h5 class="card-title">【鮮農直賣所】三峽區農會-囍願蛋-洗選 30入*2箱</h5>
+                  <p class="card-price"><del class="prd-msrp">$790</del>特價<span class="price-color">$<span class="price-num">599</span></span></p>
+                </div>
+              </div>
+              <p class="cta-bar" style="background:#65261f">立即搶購</p>
+            </div>
+            <div class="product-card">
+              <div class="card">
+                <img src="assets/P191007000026.jpg" class="card-img-top" alt="product image" loading="lazy">
+                <div class="card-body">
+                  <h5 class="card-title">【勝崎生鮮】紐西蘭PS帶骨牛小排~大份量5片組(200公克/1片)</h5>
+                  <p class="card-price"><del class="prd-msrp">$1,779</del>特價<span class="price-color">$<span class="price-num">718</span></span></p>
+                </div>
+              </div>
+              <p class="cta-bar" style="background:#65261f">立即搶購</p>
+            </div>
+            <div class="product-card">
+              <div class="card">
+                <img src="assets/P211112000067.jpg" class="card-img-top" alt="product image" loading="lazy">
+                <div class="card-body">
+                  <h5 class="card-title">【佐佐鮮 】西班牙藍帶松阪豬3包組(200g/包)</h5>
+                  <p class="card-price"><del class="prd-msrp">$928</del>特價<span class="price-color">$<span class="price-num">665</span></span></p>
+                </div>
+              </div>
+              <p class="cta-bar" style="background:#65261f">立即搶購</p>
+            </div>
+            <div class="product-card">
+              <div class="card">
+                <img src="assets/P211029000039.jpg" class="card-img-top" alt="product image" loading="lazy">
+                <div class="card-body">
+                  <h5 class="card-title">【赤豪】梅花豬肉排10片(80g/片)</h5>
+                  <p class="card-price"><del class="prd-msrp">$643</del>特價<span class="price-color">$<span class="price-num">359</span></span></p>
+                </div>
+              </div>
+              <p class="cta-bar" style="background:#65261f">立即搶購</p>
+            </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <img src="assets/deco/bottom-meat-desktop.png" alt="" class="deco-bottom d-desktop">
+        <img src="assets/deco/bottom-meat-mobile.png" alt="" class="deco-bottom d-mobile">
+      </div>
+    </section>
+
+    <section class="topic-section">
+      <div class="container">
+        <div class="topic-title-link">
+          <img src="assets/Topic4up.3d107642.png" alt="風味小點專區" class="topic-title d-desktop">
+          <img src="assets/Topic4upmb.11d666c9.png" alt="風味小點專區" class="topic-title d-mobile">
+        </div>
+        <div class="theme-panel" style="background-color:#a06c2d">
+          <div class="inner-block">
+            <div class="theme-row">
+              <div class="image-block">
+                <img src="assets/20220608172135.jpg" alt="風味小點專區" class="d-desktop">
+                <img src="assets/20220608155014.jpg" alt="風味小點專區" class="d-mobile">
+              </div>
+              <div class="product-block">
+            <div class="product-card">
+              <div class="card">
+                <img src="assets/P220602000005.jpg" class="card-img-top" alt="product image" loading="lazy">
+                <div class="card-body">
+                  <h5 class="card-title">【專業農X米白】馬祖老酒剝皮辣椒麵線2入+雞蛋6顆</h5>
+                  <p class="card-price"><del class="prd-msrp">$650</del>特價<span class="price-color">$<span class="price-num">649</span></span></p>
+                </div>
+              </div>
+              <p class="cta-bar" style="background:#a06c2d">立即搶購</p>
+            </div>
+            <div class="product-card">
+              <div class="card">
+                <img src="assets/P220601000006.jpg" class="card-img-top" alt="product image" loading="lazy">
+                <div class="card-body">
+                  <h5 class="card-title">【鮮農直賣所】梧棲區農會-黃金大豆滷豬腳650g/包</h5>
+                  <p class="card-price"><del class="prd-msrp">$610</del>特價<span class="price-color">$<span class="price-num">433</span></span></p>
+                </div>
+              </div>
+              <p class="cta-bar" style="background:#a06c2d">立即搶購</p>
+            </div>
+            <div class="product-card">
+              <div class="card">
+                <img src="assets/P220526000049.jpg" class="card-img-top" alt="product image" loading="lazy">
+                <div class="card-body">
+                  <h5 class="card-title">【蔥阿伯】香蔥蛋餅皮x2+祖傳蔥抓餅x2</h5>
+                  <p class="card-price"><del class="prd-msrp">$680</del>特價<span class="price-color">$<span class="price-num">498</span></span></p>
+                </div>
+              </div>
+              <p class="cta-bar" style="background:#a06c2d">立即搶購</p>
+            </div>
+            <div class="product-card">
+              <div class="card">
+                <img src="assets/P211203000064.jpg" class="card-img-top" alt="product image" loading="lazy">
+                <div class="card-body">
+                  <h5 class="card-title">【亞緻餐飲】天香小包-相思黑糖(400g/盒 共一盒)</h5>
+                  <p class="card-price"><del class="prd-msrp">$599</del>特價<span class="price-color">$<span class="price-num">259</span></span></p>
+                </div>
+              </div>
+              <p class="cta-bar" style="background:#a06c2d">立即搶購</p>
+            </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <img src="assets/deco/bottom-taste-desktop.png" alt="" class="deco-bottom d-desktop">
+        <img src="assets/deco/bottom-taste-mobile.png" alt="" class="deco-bottom d-mobile">
+      </div>
+    </section>
+
+    <section class="topic-section">
+      <div class="container">
+        <div class="topic-title-link">
+          <img src="assets/Topic5up.a9cb66cd.png" alt="日常良品專區" class="topic-title d-desktop">
+          <img src="assets/Topic5upmb.e21da540.png" alt="日常良品專區" class="topic-title d-mobile">
+        </div>
+        <div class="theme-panel" style="background-color:#424552">
+          <div class="inner-block">
+            <div class="theme-row">
+              <div class="image-block">
+                <img src="assets/20220608171921.jpg" alt="日常良品專區" class="d-desktop">
+                <img src="assets/20220608155040.jpg" alt="日常良品專區" class="d-mobile">
+              </div>
+              <div class="product-block">
+            <div class="product-card">
+              <div class="card">
+                <img src="assets/P200819000009.jpg" class="card-img-top" alt="product image" loading="lazy">
+                <div class="card-body">
+                  <h5 class="card-title">特級初榨橄欖油禮盒組500mlx2瓶</h5>
+                  <p class="card-price"><del class="prd-msrp">$600</del>特價<span class="price-color">$<span class="price-num">529</span></span></p>
+                </div>
+              </div>
+              <p class="cta-bar" style="background:#424552">立即搶購</p>
+            </div>
+            <div class="product-card">
+              <div class="card">
+                <img src="assets/P211224000046.jpg" class="card-img-top" alt="product image" loading="lazy">
+                <div class="card-body">
+                  <h5 class="card-title">【南海豐】100%純鮭魚鬆組合</h5>
+                  <p class="card-price"><del class="prd-msrp">$1,150</del>特價<span class="price-color">$<span class="price-num">650</span></span></p>
+                </div>
+              </div>
+              <p class="cta-bar" style="background:#424552">立即搶購</p>
+            </div>
+            <div class="product-card">
+              <div class="card">
+                <img src="assets/P220307000006.jpg" class="card-img-top" alt="product image" loading="lazy">
+                <div class="card-body">
+                  <h5 class="card-title">【豆油伯】經典三寶醬油禮盒</h5>
+                  <p class="card-price"><del class="prd-msrp">$1,100</del>特價<span class="price-color">$<span class="price-num">889</span></span></p>
+                </div>
+              </div>
+              <p class="cta-bar" style="background:#424552">立即搶購</p>
+            </div>
+            <div class="product-card">
+              <div class="card">
+                <img src="assets/P220610000007.jpg" class="card-img-top" alt="product image" loading="lazy">
+                <div class="card-body">
+                  <h5 class="card-title">【池上農會】台灣好米月光米 1包組</h5>
+                  <p class="card-price"><del class="prd-msrp">$460</del>特價<span class="price-color">$<span class="price-num">380</span></span></p>
+                </div>
+              </div>
+              <p class="cta-bar" style="background:#424552">立即搶購</p>
+            </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <img src="assets/deco/bottom-normal-desktop.png" alt="" class="deco-bottom d-desktop">
+        <img src="assets/deco/bottom-normal-mobile.png" alt="" class="deco-bottom d-mobile">
+      </div>
+    </section>
+
+    <section class="topic-section">
+      <div class="container">
+        <div class="topic-title-link">
+          <img src="assets/Topic6up.9641fdf0.png" alt="廚房好物專區" class="topic-title d-desktop">
+          <img src="assets/Topic6upmb.b41e04df.png" alt="廚房好物專區" class="topic-title d-mobile">
+        </div>
+        <div class="theme-panel" style="background-color:#61797d">
+          <div class="inner-block">
+            <div class="theme-row">
+              <div class="image-block">
+                <img src="assets/20220608154555.jpg" alt="廚房好物專區" class="d-desktop">
+                <img src="assets/20220608155121.jpg" alt="廚房好物專區" class="d-mobile">
+              </div>
+              <div class="product-block">
+            <div class="product-card">
+              <div class="card">
+                <img src="assets/P141022000030.jpg" class="card-img-top" alt="product image" loading="lazy">
+                <div class="card-body">
+                  <h5 class="card-title">【五月花】廚房紙巾(60組x48捲/組)</h5>
+                  <p class="card-price"><del class="prd-msrp">$1,119</del>特價<span class="price-color">$<span class="price-num">799</span></span></p>
+                </div>
+              </div>
+              <p class="cta-bar" style="background:#61797d">立即搶購</p>
+            </div>
+            <div class="product-card">
+              <div class="card">
+                <img src="assets/P220331000007.jpg" class="card-img-top" alt="product image" loading="lazy">
+                <div class="card-body">
+                  <h5 class="card-title">【Joseph Joseph】檔案夾砧板四片組+6.5吋主廚刀組合</h5>
+                  <p class="card-price"><del class="prd-msrp">$4,790</del>特價<span class="price-color">$<span class="price-num">1,699</span></span></p>
+                </div>
+              </div>
+              <p class="cta-bar" style="background:#61797d">立即搶購</p>
+            </div>
+            <div class="product-card">
+              <div class="card">
+                <img src="assets/P220601000018.jpg" class="card-img-top" alt="product image" loading="lazy">
+                <div class="card-body">
+                  <h5 class="card-title">【九陽Joyoung】16cm萬用不沾鍋(熊大/兔兔)TL-A11(B)</h5>
+                  <p class="card-price"><del class="prd-msrp">$880</del>特價<span class="price-color">$<span class="price-num">749</span></span></p>
+                </div>
+              </div>
+              <p class="cta-bar" style="background:#61797d">立即搶購</p>
+            </div>
+            <div class="product-card">
+              <div class="card">
+                <img src="assets/P211129000038.jpg" class="card-img-top" alt="product image" loading="lazy">
+                <div class="card-body">
+                  <h5 class="card-title">【春風】輕柔細緻抽取式衛生紙(100抽*8包*6串/箱)</h5>
+                  <p class="card-price"><del class="prd-msrp">$899</del>特價<span class="price-color">$<span class="price-num">570</span></span></p>
+                </div>
+              </div>
+              <p class="cta-bar" style="background:#61797d">立即搶購</p>
+            </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <img src="assets/deco/bottom-cook-desktop.png" alt="" class="deco-bottom d-desktop">
+        <img src="assets/deco/bottom-cook-mobile.png" alt="" class="deco-bottom d-mobile">
+      </div>
+    </section>
+
+    <div class="more-button">
+      <div>
+        <img src="assets/more.478a9ac9.png" alt="more button">
+      </div>
+    </div>
+  </main>
+
+</body>
+</html>

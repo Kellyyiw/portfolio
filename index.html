@@ -1,0 +1,582 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Kelly Wang | Portfolio</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@400;500;600;700&amp;family=Inter:wght@400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-surface-variant": "#444748",
+              "on-secondary-fixed": "#1b1c19",
+              "tertiary-fixed-dim": "#ffb4a8",
+              outline: "#747878",
+              "on-background": "#1c1c16",
+              "on-tertiary-fixed": "#410000",
+              "surface-container": "#f2ede4",
+              "secondary-fixed": "#e4e2dd",
+              "surface-tint": "#5f5e5e",
+              tertiary: "#000000",
+              "on-surface": "#1c1c16",
+              "surface-container-high": "#ece8df",
+              "surface-container-highest": "#e6e2d9",
+              "error-container": "#ffdad6",
+              background: "#fdf9f0",
+              "on-primary-fixed-variant": "#474746",
+              "inverse-primary": "#c8c6c5",
+              "on-tertiary-container": "#ea4c3a",
+              "outline-variant": "#c4c7c7",
+              "surface-dim": "#dedad1",
+              "on-secondary-fixed-variant": "#474744",
+              "on-primary": "#ffffff",
+              "on-secondary-container": "#63635f",
+              "primary-fixed": "#e5e2e1",
+              "secondary-container": "#e1dfdb",
+              primary: "#000000",
+              "on-tertiary": "#ffffff",
+              "surface-variant": "#e6e2d9",
+              "primary-container": "#1c1b1b",
+              "inverse-surface": "#32302a",
+              "surface-container-lowest": "#ffffff",
+              "on-secondary": "#ffffff",
+              "on-tertiary-fixed-variant": "#920703",
+              "primary-fixed-dim": "#c8c6c5",
+              "on-primary-fixed": "#1c1b1b",
+              "tertiary-fixed": "#ffdad4",
+              "inverse-on-surface": "#f5f0e7",
+              surface: "#fdf9f0",
+              "surface-container-low": "#f7f3ea",
+              "surface-bright": "#fdf9f0",
+              "on-error": "#ffffff",
+              "secondary-fixed-dim": "#c8c6c2",
+              error: "#ba1a1a",
+              "tertiary-container": "#410000",
+              "on-primary-container": "#858383",
+              secondary: "#5e5e5b",
+              "on-error-container": "#93000a",
+            },
+            borderRadius: {
+              DEFAULT: "0px",
+              lg: "0px",
+              xl: "0px",
+              full: "9999px",
+            },
+            spacing: {
+              "grid-margin": "64px",
+              "bento-gap": "24px",
+              unit: "8px",
+              "grid-gutter": "1px",
+              "container-padding": "32px",
+            },
+            fontFamily: {
+              "body-md": ["Inter"],
+              "display-2xl": ["Bodoni Moda"],
+              "label-caps": ["Inter"],
+              "body-lg": ["Inter"],
+              "nav-link": ["Inter"],
+              "display-lg": ["Bodoni Moda"],
+              "headline-md": ["Bodoni Moda"],
+              "display-lg-mobile": ["Bodoni Moda"],
+              headline: ["Bodoni Moda"],
+              display: ["Bodoni Moda"],
+              body: ["Inter"],
+              label: ["Inter"],
+            },
+            fontSize: {
+              "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+              "display-2xl": [
+                "120px",
+                {
+                  lineHeight: "110px",
+                  letterSpacing: "-0.04em",
+                  fontWeight: "700",
+                },
+              ],
+              "label-caps": [
+                "12px",
+                {
+                  lineHeight: "16px",
+                  letterSpacing: "0.1em",
+                  fontWeight: "600",
+                },
+              ],
+              "body-lg": [
+                "18px",
+                {
+                  lineHeight: "28px",
+                  letterSpacing: "0.01em",
+                  fontWeight: "400",
+                },
+              ],
+              "nav-link": [
+                "14px",
+                {
+                  lineHeight: "20px",
+                  letterSpacing: "0.05em",
+                  fontWeight: "500",
+                },
+              ],
+              "display-lg": [
+                "72px",
+                {
+                  lineHeight: "76px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "600",
+                },
+              ],
+              "headline-md": [
+                "32px",
+                { lineHeight: "40px", fontWeight: "500" },
+              ],
+              "display-lg-mobile": [
+                "48px",
+                {
+                  lineHeight: "52px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "600",
+                },
+              ],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      .bento-border {
+        border: 1px solid theme("colors.outline-variant");
+      }
+      .bento-cell {
+        transition: background-color 400ms ease;
+      }
+      .bento-cell:hover {
+        background-color: theme("colors.surface-container-low");
+      }
+      .nav-active::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -6px;
+        height: 1px;
+        background: theme("colors.on-tertiary-container");
+      }
+      .reveal {
+        opacity: 0;
+        transform: translateY(32px);
+        transition:
+          opacity 1600ms cubic-bezier(0.16, 1, 0.3, 1),
+          transform 1600ms cubic-bezier(0.16, 1, 0.3, 1);
+        transition-delay: var(--reveal-delay, 0ms);
+      }
+      .reveal.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .typing-cursor::after {
+        content: "|";
+        display: inline-block;
+        margin-left: 2px;
+        animation: type-blink 800ms step-end infinite;
+      }
+      @keyframes type-blink {
+        50% {
+          opacity: 0;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          animation-duration: 0.001ms !important;
+          transition-duration: 0.001ms !important;
+        }
+      }
+    </style>
+  </head>
+  <body
+    class="bg-background text-on-background antialiased selection:bg-tertiary-fixed-dim selection:text-primary"
+  >
+    <!-- TopNavBar -->
+    <nav
+      class="bg-background/85 backdrop-blur-md border-b border-outline-variant fixed top-0 left-0 right-0 z-50 h-20"
+    >
+      <div
+        class="max-w-[1200px] mx-auto px-grid-margin h-full flex justify-between items-center"
+      >
+        <a
+          class="font-display-lg text-headline-md uppercase tracking-[0em] text-primary"
+          href="index.html"
+          >KELLY WANG</a
+        >
+        <div class="hidden md:flex gap-10 items-center">
+          <a
+            class="relative font-label-caps text-nav-link uppercase tracking-widest text-primary hover:text-on-tertiary-container transition-colors duration-300 nav-active"
+            href="index.html"
+            >HOME</a
+          >
+          <a
+            class="relative font-label-caps text-nav-link uppercase tracking-widest text-on-surface-variant hover:text-on-tertiary-container transition-colors duration-300"
+            href="about.html"
+            >ABOUT</a
+          >
+          <a
+            class="relative font-label-caps text-nav-link uppercase tracking-widest text-on-surface-variant hover:text-on-tertiary-container transition-colors duration-300"
+            href="work.html"
+            >WORKS</a
+          >
+        </div>
+        <div class="flex items-center gap-4">
+          <a
+          class="hidden md:inline-block font-label-caps text-label-caps uppercase bg-primary text-on-primary px-6 py-3 hover:bg-on-tertiary-container transition-colors duration-300 whitespace-nowrap"
+          href="mailto:nnnvywang@gmail.com"
+          >CONTACT</a
+        >
+          <button
+            id="mobile-menu-toggle"
+            class="md:hidden flex items-center justify-center text-primary"
+            aria-label="Toggle menu"
+            aria-expanded="false"
+          >
+            <span class="material-symbols-outlined">menu</span>
+          </button>
+        </div>
+      </div>
+    
+      <div
+        id="mobile-menu-panel"
+        class="hidden md:hidden flex-col items-start gap-6 px-grid-margin py-8 bg-background border-t border-outline-variant absolute top-20 left-0 right-0"
+      >
+          <a
+            class="relative font-label-caps text-nav-link uppercase tracking-widest text-primary hover:text-on-tertiary-container transition-colors duration-300 nav-active"
+            href="index.html"
+            >HOME</a
+          >
+          <a
+            class="relative font-label-caps text-nav-link uppercase tracking-widest text-on-surface-variant hover:text-on-tertiary-container transition-colors duration-300"
+            href="about.html"
+            >ABOUT</a
+          >
+          <a
+            class="relative font-label-caps text-nav-link uppercase tracking-widest text-on-surface-variant hover:text-on-tertiary-container transition-colors duration-300"
+            href="work.html"
+            >WORKS</a
+          >
+          <a
+            class="mobile-menu-cta font-label-caps text-label-caps uppercase bg-primary text-on-primary px-6 py-3 hover:bg-on-tertiary-container transition-colors duration-300 mt-2"
+            href="mailto:nnnvywang@gmail.com"
+            >CONTACT</a
+          >
+        </div>
+    </nav>
+
+    <main class="pt-20 px-grid-margin pb-16 max-w-[1200px] mx-auto w-full">
+      <!-- Hero Section -->
+      <section
+        class="min-h-[80vh] flex flex-col justify-center border-b bento-border pb-16 mb-16 relative"
+      >
+        <svg
+          class="absolute top-12 right-0 text-outline-variant hidden md:block"
+          width="28"
+          height="28"
+          viewBox="0 0 24 24"
+          fill="none"
+        >
+          <path d="M12 3v18M3 12h18" stroke="currentColor" stroke-width="1" />
+        </svg>
+
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-0">
+          <div class="col-span-1 md:col-span-8 flex flex-col justify-center pr-0 md:pr-16">
+            <h1
+              id="hero-h1"
+              class="font-display-2xl text-display-lg-mobile md:text-display-2xl text-primary leading-none uppercase mb-8"
+            >
+              Hi,<br />I'm
+              <span class="text-on-tertiary-container">Kelly</span> WANG
+            </h1>
+            <p
+              id="hero-p"
+              class="font-body-lg text-body-lg text-on-surface-variant max-w-md opacity-0"
+            >
+              融合視覺美學、使用者體驗與前端開發的跨界設計師
+            </p>
+            <a
+              id="hero-cta"
+              class="reveal inline-flex w-fit items-center space-x-2 mt-8 font-label-caps text-label-caps uppercase border-b border-primary pb-1 hover:text-on-tertiary-container hover:border-on-tertiary-container transition-colors"
+              href="about.html"
+            >
+              <span>MORE ABOUT ME</span>
+              <span class="material-symbols-outlined text-sm">arrow_forward</span>
+            </a>
+          </div>
+          <div
+            class="col-span-1 md:col-span-4 relative mt-12 md:mt-0 md:-ml-28 flex justify-center md:justify-end"
+          >
+            <img
+              id="hero-img"
+              alt="Editorial Portrait"
+              class="reveal w-full max-w-[800px] h-auto object-contain"
+              data-alt="A striking editorial portrait of a young woman with dark bobbed hair wearing dark sunglasses and a structured black blazer, set against a stark, high-contrast red background, composited on a tilted crimson oval backdrop with the portrait bleeding above the frame."
+              src="assets/images/Kelly_w.png"
+            />
+          </div>
+        </div>
+      </section>
+
+
+      <!-- Selected Work Bento Grid -->
+      <section class="mb-16">
+        <div class="flex justify-between items-end mb-8">
+          <h2
+            class="reveal font-display-lg text-[65px] leading-[65px] font-semibold tracking-[-0.02em] text-primary uppercase"
+            data-reveal="scroll"
+          >
+            SELECTED<br /><span class="text-on-tertiary-container">WORKS</span>
+          </h2>
+          <a
+            id="see-all-works"
+            class="reveal hidden md:inline-flex items-center space-x-2 font-label-caps text-label-caps uppercase border-b border-primary pb-1 hover:text-on-tertiary-container hover:border-on-tertiary-container transition-colors"
+            href="work.html"
+          >
+            <span>SEE ALL WORKS</span>
+            <span class="material-symbols-outlined text-sm">arrow_forward</span>
+          </a>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-0 bento-border">
+          <!-- Work 01 -->
+          <a
+            href="work.html"
+            class="reveal col-span-1 md:col-span-4 group cursor-pointer border-b md:border-b-0 md:border-r bento-border border-l-0 border-t-0 border-r-0 relative overflow-hidden bg-primary aspect-square flex flex-col justify-between p-container-padding"
+            data-reveal="scroll"
+          >
+            <div class="relative z-10 flex justify-between items-start">
+              <span class="font-headline-md text-headline-md text-on-primary"></span>
+              <div class="text-right">
+                <h3 class="font-label-caps text-[14px] leading-[19px] font-semibold tracking-[0.1em] text-on-primary mb-1 uppercase">
+                  PAPAWASH
+                </h3>
+                <p class="font-body-md text-[12px] leading-[18px] font-normal text-on-primary/70">
+                  UI/UX
+                </p>
+              </div>
+            </div>
+            <div
+              class="absolute inset-0 z-0 opacity-70 group-hover:opacity-100 transition-opacity duration-500"
+            >
+              <img
+                alt="PAPAWASH"
+                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                src="assets/images/1.png"
+              />
+            </div>
+          </a>
+          <!-- Work 02 -->
+          <a
+            href="work.html"
+            class="reveal col-span-1 md:col-span-4 group cursor-pointer border-b md:border-b-0 md:border-r bento-border border-l-0 border-t-0 border-r-0 relative overflow-hidden bg-[#e5d0aa] aspect-square p-container-padding flex flex-col justify-between"
+            data-reveal="scroll"
+            style="--reveal-delay: 220ms"
+          >
+            <div class="relative z-10 flex justify-between items-start">
+              <span class="font-headline-md text-headline-md text-primary"></span>
+              <div class="text-right">
+                <h3 class="font-label-caps text-[14px] leading-[19px] font-semibold tracking-[0.1em] text-primary mb-1 uppercase">
+                  COSMIC FATES
+                </h3>
+                <p class="font-body-md text-[12px] leading-[18px] font-normal text-on-surface-variant">
+                  FRONT-END
+                </p>
+              </div>
+            </div>
+            <div
+              class="absolute inset-0 z-0 opacity-50 mix-blend-multiply group-hover:opacity-80 transition-opacity duration-500"
+            >
+              <img
+                alt="COSMIC FATES"
+                class="w-full h-full object-cover"
+                src="assets/images/2.png"
+              />
+            </div>
+          </a>
+          <!-- Work 03 -->
+          <a
+            id="work-card-last"
+            href="work.html"
+            class="reveal col-span-1 md:col-span-4 group cursor-pointer relative overflow-hidden bg-surface-container-high aspect-square p-container-padding flex flex-col justify-between"
+            data-reveal="scroll"
+            style="--reveal-delay: 440ms"
+          >
+            <div class="relative z-10 flex justify-between items-start">
+              <span class="font-headline-md text-headline-md text-primary"></span>
+              <div class="text-right">
+                <h3 class="font-label-caps text-[14px] leading-[19px] font-semibold tracking-[0.1em] text-primary mb-1 uppercase">
+                  EC-BANNER
+                </h3>
+                <p class="font-body-md text-[12px] leading-[18px] font-normal text-on-surface-variant">
+                  VISUAL DESIGN
+                </p>
+              </div>
+            </div>
+            <div class="absolute inset-0 z-0">
+              <img
+                alt="EC-BANNER"
+                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                src="assets/images/3.png"
+              />
+              <div class="absolute inset-0 bg-[#EEE890] opacity-40 group-hover:opacity-0 transition-opacity duration-500"></div>
+            </div>
+          </a>
+        </div>
+        <div class="mt-8 md:hidden">
+          <a
+            class="inline-flex items-center space-x-2 font-label-caps text-label-caps uppercase border-b border-primary pb-1"
+            href="work.html"
+          >
+            <span>SEE ALL WORK</span>
+            <span class="material-symbols-outlined text-sm">arrow_forward</span>
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full border-t border-outline-variant bg-background">
+      <div class="max-w-[1200px] mx-auto px-grid-margin py-container-padding flex justify-center">
+        <p
+          class="font-body-md text-on-surface-variant uppercase tracking-widest text-center"
+          style="font-size: 0.85rem"
+        >
+          © 2026 KELLY WANG. ALL RIGHTS RESERVED.
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // Elements above the fold fade in as soon as the page loads.
+        document.querySelectorAll('[data-reveal="load"]').forEach((el) => {
+          requestAnimationFrame(() => el.classList.add("is-visible"));
+        });
+
+        // Everything else rises into view like a horizon, once scrolled to.
+        const seeAllWorksLink = document.getElementById("see-all-works");
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+                if (entry.target.id === "work-card-last" && seeAllWorksLink) {
+                  seeAllWorksLink.classList.add("is-visible");
+                }
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.15, rootMargin: "0px 0px -80px 0px" }
+        );
+
+        document.querySelectorAll('[data-reveal="scroll"]').forEach((el) => {
+          observer.observe(el);
+        });
+
+        // Mobile nav menu toggle
+        const mobileMenuToggle = document.getElementById("mobile-menu-toggle");
+        const mobileMenuPanel = document.getElementById("mobile-menu-panel");
+        if (mobileMenuToggle && mobileMenuPanel) {
+          const closeMobileMenu = () => {
+            mobileMenuPanel.classList.add("hidden");
+            mobileMenuPanel.classList.remove("flex");
+            mobileMenuToggle.setAttribute("aria-expanded", "false");
+            mobileMenuToggle.querySelector(".material-symbols-outlined").textContent =
+              "menu";
+          };
+          mobileMenuToggle.addEventListener("click", () => {
+            const opening = mobileMenuPanel.classList.contains("hidden");
+            mobileMenuPanel.classList.toggle("hidden", !opening);
+            mobileMenuPanel.classList.toggle("flex", opening);
+            mobileMenuToggle.setAttribute("aria-expanded", String(opening));
+            mobileMenuToggle.querySelector(".material-symbols-outlined").textContent =
+              opening ? "close" : "menu";
+          });
+          mobileMenuPanel.querySelectorAll("a").forEach((link) => {
+            link.addEventListener("click", closeMobileMenu);
+          });
+        }
+
+        // Hero: type out the headline, then the tagline, then reveal the portrait.
+        const heroH1 = document.getElementById("hero-h1");
+        const heroP = document.getElementById("hero-p");
+        const heroImg = document.getElementById("hero-img");
+        const heroCta = document.getElementById("hero-cta");
+        const prefersReducedMotion = window.matchMedia(
+          "(prefers-reduced-motion: reduce)"
+        ).matches;
+
+        function typeWriter(rootEl, speed) {
+          return new Promise((resolve) => {
+            const walker = document.createTreeWalker(
+              rootEl,
+              NodeFilter.SHOW_TEXT
+            );
+            const nodes = [];
+            let node;
+            while ((node = walker.nextNode())) nodes.push(node);
+            const fullTexts = nodes.map((n) => n.textContent);
+            nodes.forEach((n) => (n.textContent = ""));
+
+            let nodeIndex = 0;
+            let charIndex = 0;
+            function step() {
+              if (nodeIndex >= nodes.length) {
+                resolve();
+                return;
+              }
+              const text = fullTexts[nodeIndex];
+              if (charIndex < text.length) {
+                nodes[nodeIndex].textContent += text[charIndex];
+                charIndex++;
+                setTimeout(step, speed);
+              } else {
+                nodeIndex++;
+                charIndex = 0;
+                step();
+              }
+            }
+            step();
+          });
+        }
+
+        if (heroH1 && heroP && heroImg && heroCta) {
+          if (prefersReducedMotion) {
+            heroP.classList.remove("opacity-0");
+            heroImg.classList.add("is-visible");
+            heroCta.classList.add("is-visible");
+          } else {
+            heroH1.classList.add("typing-cursor");
+            typeWriter(heroH1, 28)
+              .then(() => {
+                heroH1.classList.remove("typing-cursor");
+                heroP.classList.remove("opacity-0");
+                heroP.classList.add("typing-cursor");
+                return typeWriter(heroP, 18);
+              })
+              .then(() => {
+                heroP.classList.remove("typing-cursor");
+                heroImg.classList.add("is-visible");
+                heroCta.classList.add("is-visible");
+              });
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

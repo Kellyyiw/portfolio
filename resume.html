@@ -1,0 +1,699 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Kelly Wang — Resume</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@400;500;600;700&amp;family=Inter:wght@400;500;600;700&amp;family=Noto+Sans+TC:wght@300;400;500;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-surface-variant": "#444748",
+              "on-secondary-fixed": "#1b1c19",
+              "tertiary-fixed-dim": "#ffb4a8",
+              outline: "#747878",
+              "on-background": "#1c1c16",
+              "on-tertiary-fixed": "#410000",
+              "surface-container": "#f2ede4",
+              "secondary-fixed": "#e4e2dd",
+              "surface-tint": "#5f5e5e",
+              tertiary: "#000000",
+              "on-surface": "#1c1c16",
+              "surface-container-high": "#ece8df",
+              "surface-container-highest": "#e6e2d9",
+              "error-container": "#ffdad6",
+              background: "#fdf9f0",
+              "on-primary-fixed-variant": "#474746",
+              "inverse-primary": "#c8c6c5",
+              "on-tertiary-container": "#ea4c3a",
+              "outline-variant": "#c4c7c7",
+              "surface-dim": "#dedad1",
+              "on-secondary-fixed-variant": "#474744",
+              "on-primary": "#ffffff",
+              "on-secondary-container": "#63635f",
+              "primary-fixed": "#e5e2e1",
+              "secondary-container": "#e1dfdb",
+              primary: "#000000",
+              "on-tertiary": "#ffffff",
+              "surface-variant": "#e6e2d9",
+              "primary-container": "#1c1b1b",
+              "inverse-surface": "#32302a",
+              "surface-container-lowest": "#ffffff",
+              "on-secondary": "#ffffff",
+              "on-tertiary-fixed-variant": "#920703",
+              "primary-fixed-dim": "#c8c6c5",
+              "on-primary-fixed": "#1c1b1b",
+              "tertiary-fixed": "#ffdad4",
+              "inverse-on-surface": "#f5f0e7",
+              surface: "#fdf9f0",
+              "surface-container-low": "#f7f3ea",
+              "surface-bright": "#fdf9f0",
+              "on-error": "#ffffff",
+              "secondary-fixed-dim": "#c8c6c2",
+              error: "#ba1a1a",
+              "tertiary-container": "#410000",
+              "on-primary-container": "#858383",
+              secondary: "#5e5e5b",
+              "on-error-container": "#93000a",
+            },
+            borderRadius: {
+              DEFAULT: "0px",
+              lg: "0px",
+              xl: "0px",
+              full: "9999px",
+            },
+            spacing: {
+              "grid-margin": "64px",
+              "bento-gap": "24px",
+              unit: "8px",
+              "grid-gutter": "1px",
+              "container-padding": "32px",
+            },
+            fontFamily: {
+              "body-md": ["Inter"],
+              "display-2xl": ["Bodoni Moda"],
+              "label-caps": ["Inter"],
+              "body-lg": ["Inter"],
+              "nav-link": ["Inter"],
+              "display-lg": ["Bodoni Moda"],
+              "headline-md": ["Bodoni Moda"],
+              "display-lg-mobile": ["Bodoni Moda"],
+              headline: ["Bodoni Moda"],
+              display: ["Bodoni Moda"],
+              body: ["Inter"],
+              label: ["Inter"],
+            },
+            fontSize: {
+              "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+              "display-2xl": [
+                "120px",
+                {
+                  lineHeight: "110px",
+                  letterSpacing: "-0.04em",
+                  fontWeight: "700",
+                },
+              ],
+              "label-caps": [
+                "12px",
+                {
+                  lineHeight: "16px",
+                  letterSpacing: "0.1em",
+                  fontWeight: "600",
+                },
+              ],
+              "body-lg": [
+                "18px",
+                {
+                  lineHeight: "28px",
+                  letterSpacing: "0.01em",
+                  fontWeight: "400",
+                },
+              ],
+              "nav-link": [
+                "14px",
+                {
+                  lineHeight: "20px",
+                  letterSpacing: "0.05em",
+                  fontWeight: "500",
+                },
+              ],
+              "display-lg": [
+                "72px",
+                {
+                  lineHeight: "76px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "600",
+                },
+              ],
+              "headline-md": [
+                "32px",
+                { lineHeight: "40px", fontWeight: "500" },
+              ],
+              "display-lg-mobile": [
+                "48px",
+                {
+                  lineHeight: "52px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "600",
+                },
+              ],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      .bento-border {
+        border: 1px solid theme("colors.outline-variant");
+      }
+      .bento-cell {
+        transition: background-color 400ms ease;
+      }
+      .bento-cell:hover {
+        background-color: theme("colors.surface-container-low");
+      }
+      .nav-active::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -6px;
+        height: 1px;
+        background: theme("colors.on-tertiary-container");
+      }
+      .chinese-body {
+        font-family: "Noto Sans TC", sans-serif;
+        line-height: 2.1;
+        letter-spacing: 0.05em;
+      }
+      .reveal {
+        opacity: 0;
+        transform: translateY(32px);
+        transition:
+          opacity 1600ms cubic-bezier(0.16, 1, 0.3, 1),
+          transform 1600ms cubic-bezier(0.16, 1, 0.3, 1);
+        transition-delay: var(--reveal-delay, 0ms);
+      }
+      .reveal.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          animation-duration: 0.001ms !important;
+          transition-duration: 0.001ms !important;
+        }
+      }
+      /* ===== Resume ===== */
+      .cv-title {
+        font-family: Inter, sans-serif;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: #444748;
+      }
+      .cv-toolbar {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        gap: 12px;
+        margin-bottom: 24px;
+      }
+
+      .cv-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 22px;
+        border: 1px solid #000;
+        font-family: Inter, sans-serif;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+      }
+      .cv-btn .material-symbols-outlined { font-size: 16px; }
+      .cv-btn:hover { background: #000; color: #fff; }
+      .cv-btn-solid { background: #000; color: #fff; }
+      .cv-btn-solid:hover { background: #ea4c3a; border-color: #ea4c3a; }
+
+      /* 履歷卡片：圓角邊框，左側底色 */
+      .cv-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+        border: 1px solid #c4c7c7;
+        border-radius: 20px;
+        overflow: hidden;
+        background: #fdf9f0;
+      }
+      .cv-side { padding: 56px 44px; background: #f3dfcc; }
+      .cv-main { padding: 56px 56px 48px; }
+      .cv-side .cv-title { border-bottom-color: #d9c2ab; }
+      .cv-side .cv-tags li { border-color: #d0b79e; background: rgba(253, 249, 240, 0.5); }
+      .cv-side .cv-block + .cv-block,
+      .cv-main .cv-block + .cv-block { margin-top: 56px; }
+      .cv-title {
+        display: block;
+        padding-bottom: 12px;
+        margin-bottom: 20px;
+        border-bottom: 1px solid #c4c7c7;
+      }
+
+      /* Sidebar */
+      .cv-identity { margin-bottom: 48px; }
+      .cv-photo img { width: 100%; max-width: 150px; height: auto; display: block; }
+      .cv-name-zh {
+        margin-top: 24px;
+        font-family: "Noto Sans TC", sans-serif;
+        font-size: 26px;
+        font-weight: 400;
+        letter-spacing: 0.24em;
+      }
+      .cv-name {
+        margin-top: 4px;
+        font-family: Inter, sans-serif;
+        font-size: 17px;
+        font-weight: 500;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+      .cv-role-title {
+        margin-top: 10px;
+        font-family: Inter, sans-serif;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: #444748;
+      }
+      .cv-contact li { display: flex; align-items: center; gap: 10px; font-size: 15px; }
+      .cv-contact li + li { margin-top: 10px; }
+      .cv-contact .material-symbols-outlined { font-size: 18px; color: #ea4c3a; }
+      .cv-contact a { border-bottom: 1px solid transparent; transition: border-color 0.3s, color 0.3s; }
+      .cv-contact a:hover { color: #ea4c3a; border-color: #ea4c3a; }
+      .cv-date {
+        font-family: Inter, sans-serif;
+        font-size: 12px;
+        font-weight: 500;
+        letter-spacing: 0.1em;
+        color: #444748;
+      }
+      .cv-strong { margin-top: 6px; font-family: "Noto Sans TC", sans-serif; font-size: 17px; font-weight: 500; letter-spacing: 0.06em; }
+      .cv-muted { font-family: "Noto Sans TC", sans-serif; font-size: 15px; letter-spacing: 0.06em; color: #444748; }
+      .cv-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+      .cv-sub {
+        margin: 18px 0 8px;
+        font-family: Inter, sans-serif;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: #747878;
+      }
+      .cv-title + .cv-sub { margin-top: 0; }
+      .cv-tags li {
+        padding: 6px 14px;
+        border: 1px solid #c4c7c7;
+        font-family: "Noto Sans TC", sans-serif;
+        font-size: 14px;
+        letter-spacing: 0.06em;
+      }
+
+      /* Main */
+      .cv-profile p + p { margin-top: 12px; }
+      .cv-profile { font-size: 16px; color: #1c1c16; }
+      .cv-jobs > li {
+        display: grid;
+        grid-template-columns: 170px minmax(0, 1fr);
+        gap: 24px;
+        padding: 28px 0;
+        border-bottom: 1px solid #e6e2d9;
+      }
+      .cv-jobs > li:first-child { padding-top: 4px; }
+      .cv-jobs .cv-date { padding-top: 5px; }
+      .cv-jobs h3 {
+        font-family: "Noto Sans TC", sans-serif;
+        font-size: 19px;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+      }
+      .cv-role { margin-top: 4px; font-family: "Noto Sans TC", sans-serif; font-size: 14px; letter-spacing: 0.08em; color: #747878; }
+      .cv-jobs ul { margin-top: 12px; }
+      .cv-jobs ul li {
+        position: relative;
+        padding-left: 18px;
+        font-family: "Noto Sans TC", sans-serif;
+        font-size: 15px;
+        line-height: 1.9;
+        letter-spacing: 0.04em;
+        color: #444748;
+      }
+      .cv-jobs ul li::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0.85em;
+        width: 8px;
+        height: 1px;
+        background: #1c1c16;
+      }
+      .cv-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        margin-top: 14px;
+        padding-bottom: 2px;
+        border-bottom: 1px solid #000;
+        font-family: Inter, sans-serif;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        transition: color 0.3s, border-color 0.3s;
+      }
+      .cv-link .material-symbols-outlined { font-size: 14px; }
+      .cv-link:hover { color: #ea4c3a; border-color: #ea4c3a; }
+
+      @media screen and (max-width: 767px) {
+        .cv { padding-left: 24px !important; padding-right: 24px !important; padding-top: 8rem !important; }
+        .cv-toolbar { justify-content: flex-start; margin-bottom: 20px; }
+        /* 手機：上方為底色側欄，下方為簡介與經歷 */
+        .cv-grid { grid-template-columns: 1fr; border-radius: 16px; }
+        .cv-side { padding: 36px 24px; }
+        .cv-main { padding: 36px 24px 32px; }
+        .cv-side .cv-block + .cv-block { margin-top: 40px; }
+        .cv-jobs > li { grid-template-columns: 1fr; gap: 8px; }
+      }
+
+      /* ===== 列印／另存 PDF：A4 單頁 ===== */
+      @page { size: A4; margin: 12mm 12mm; }
+      @media print {
+        nav, footer, .cv-toolbar, .cv-link { display: none !important; }
+        html, body { background: #fff !important; }
+        .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+        .cv { padding: 0 !important; max-width: none !important; }
+        .cv-identity { margin-bottom: 16px; }
+        .cv-photo img { max-width: 96px; }
+        .cv-name-zh { margin-top: 10px; font-size: 18px; }
+        .cv-name { margin-top: 2px; font-size: 11px; }
+        .cv-role-title { margin-top: 5px; font-size: 8.5px; }
+        .cv-grid { grid-template-columns: 31% 1fr; border-radius: 14px; }
+        .cv-side { padding: 22px 18px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .cv-main { padding: 22px 22px 16px; }
+        .cv-main { order: 0; }
+        .cv-side .cv-block + .cv-block, .cv-main .cv-block + .cv-block { margin-top: 18px; }
+        .cv-title { padding-bottom: 5px; margin-bottom: 9px; font-size: 10px; }
+        .cv-profile { font-size: 11.5px; line-height: 1.8; }
+        .cv-profile p + p { margin-top: 5px; }
+        .cv-jobs > li { grid-template-columns: 92px 1fr; gap: 12px; padding: 9px 0; break-inside: avoid; }
+        .cv-jobs h3 { font-size: 13px; }
+        .cv-role { margin-top: 1px; font-size: 10.5px; }
+        .cv-jobs ul { margin-top: 4px; }
+        .cv-jobs ul li { font-size: 10.5px; line-height: 1.7; }
+        .cv-date { font-size: 9.5px; }
+        .cv-strong { font-size: 12.5px; }
+        .cv-muted, .cv-contact li { font-size: 11px; }
+        .cv-tags { gap: 5px; }
+        .cv-sub { margin: 8px 0 4px; font-size: 8.5px; }
+        .cv-title + .cv-sub { margin-top: 0; }
+        .cv-tags li { padding: 3px 8px; font-size: 10.5px; }
+        .cv-contact .material-symbols-outlined {
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+        }
+      }
+    </style>
+  </head>
+  <body
+    class="bg-background text-on-background antialiased selection:bg-tertiary-fixed-dim selection:text-primary"
+  >
+    <!-- TopNavBar -->
+    <nav
+      class="bg-background/85 backdrop-blur-md border-b border-outline-variant fixed top-0 left-0 right-0 z-50 h-20"
+    >
+      <div
+        class="max-w-[1200px] mx-auto px-grid-margin h-full flex justify-between items-center"
+      >
+        <a
+          class="font-display-lg text-headline-md uppercase tracking-[0em] text-primary"
+          href="index.html"
+          >KELLY WANG</a
+        >
+        <div class="hidden md:flex gap-10 items-center">
+          <a
+            class="relative font-label-caps text-nav-link uppercase tracking-widest text-on-surface-variant hover:text-on-tertiary-container transition-colors duration-300"
+            href="index.html"
+            >HOME</a
+          >
+          <a
+            class="relative font-label-caps text-nav-link uppercase tracking-widest text-primary hover:text-on-tertiary-container transition-colors duration-300 nav-active"
+            href="about.html"
+            >ABOUT ME</a
+          >
+          <a
+            class="relative font-label-caps text-nav-link uppercase tracking-widest text-on-surface-variant hover:text-on-tertiary-container transition-colors duration-300"
+            href="work.html"
+            >WORKS</a
+          >
+        </div>
+        <div class="flex items-center gap-4">
+          <a
+          class="hidden md:inline-block font-label-caps text-label-caps uppercase bg-primary text-on-primary px-6 py-3 hover:bg-on-tertiary-container transition-colors duration-300 whitespace-nowrap"
+          href="mailto:nnnvywang@gmail.com"
+          >CONTACT</a
+        >
+          <button
+            id="mobile-menu-toggle"
+            class="md:hidden flex items-center justify-center text-primary"
+            aria-label="Toggle menu"
+            aria-expanded="false"
+          >
+            <span class="material-symbols-outlined">menu</span>
+          </button>
+        </div>
+      </div>
+    
+      <div
+        id="mobile-menu-panel"
+        class="hidden md:hidden flex-col items-start gap-6 px-grid-margin py-8 bg-background border-t border-outline-variant absolute top-20 left-0 right-0"
+      >
+          <a
+            class="relative font-label-caps text-nav-link uppercase tracking-widest text-on-surface-variant hover:text-on-tertiary-container transition-colors duration-300"
+            href="index.html"
+            >HOME</a
+          >
+          <a
+            class="relative font-label-caps text-nav-link uppercase tracking-widest text-primary hover:text-on-tertiary-container transition-colors duration-300 nav-active"
+            href="about.html"
+            >ABOUT ME</a
+          >
+          <a
+            class="relative font-label-caps text-nav-link uppercase tracking-widest text-on-surface-variant hover:text-on-tertiary-container transition-colors duration-300"
+            href="work.html"
+            >WORKS</a
+          >
+          <a
+            class="mobile-menu-cta font-label-caps text-label-caps uppercase bg-primary text-on-primary px-6 py-3 hover:bg-on-tertiary-container transition-colors duration-300 mt-2"
+            href="mailto:nnnvywang@gmail.com"
+            >CONTACT</a
+          >
+        </div>
+    </nav>
+
+
+    <main class="cv pt-[10rem] px-grid-margin pb-24 max-w-[1200px] mx-auto w-full">
+      
+
+      <div class="cv-grid">
+        <!-- Sidebar -->
+        <aside class="cv-side">
+          <div class="cv-identity reveal" data-reveal="load" style="--reveal-delay: 200ms">
+            <div class="cv-photo">
+              <img src="assets/images/resume/photo.png" alt="王怡鈞 Wang Yi Jun" />
+            </div>
+            <h1 class="cv-name-zh">王怡鈞</h1>
+            <p class="cv-name">Wang Yi Jun</p>
+            <p class="cv-role-title">Senior Visual Designer ・ UI/UX</p>
+          </div>
+
+          <section class="cv-block reveal" data-reveal="scroll">
+            <h2 class="cv-title">Contact</h2>
+            <ul class="cv-contact">
+              <li>
+                <span class="material-symbols-outlined">mail</span>
+                <a href="mailto:nnnvywang@gmail.com">nnnvywang@gmail.com</a>
+              </li>
+              <li>
+                <span class="material-symbols-outlined">language</span>
+                <a href="work.html">Portfolio ・ Works</a>
+              </li>
+            </ul>
+          </section>
+
+          <section class="cv-block reveal" data-reveal="scroll">
+            <h2 class="cv-title">Education</h2>
+            <p class="cv-date">2008/09 — 2012/06</p>
+            <p class="cv-strong">銘傳大學</p>
+            <p class="cv-muted">商業設計學系</p>
+          </section>
+
+          <section class="cv-block reveal" data-reveal="scroll">
+            <h2 class="cv-title">Expertise</h2>
+            <ul class="cv-tags">
+              <li>品牌整合與視覺系統</li>
+              <li>電商視覺策略</li>
+              <li>跨部門開發協作</li>
+              <li>市場趨勢洞察</li>
+              <li>響應式網頁實作思維</li>
+            </ul>
+          </section>
+
+          <section class="cv-block reveal" data-reveal="scroll">
+            <h2 class="cv-title">Skills</h2>
+            <p class="cv-sub">Design</p>
+            <ul class="cv-tags">
+              <li>Figma</li>
+              <li>Photoshop</li>
+              <li>Illustrator</li>
+            </ul>
+            <p class="cv-sub">Development</p>
+            <ul class="cv-tags">
+              <li>HTML</li>
+              <li>CSS</li>
+              <li>JavaScript</li>
+              <li>GitHub</li>
+              <li>VS Code</li>
+            </ul>
+            <p class="cv-sub">AI Tools</p>
+            <ul class="cv-tags">
+              <li>ChatGPT</li>
+              <li>Claude</li>
+              <li>Stitch</li>
+            </ul>
+          </section>
+        </aside>
+
+        <!-- Main column -->
+        <div class="cv-main">
+          <section class="cv-block reveal" data-reveal="load" style="--reveal-delay: 400ms">
+            <h2 class="cv-title">About me</h2>
+            <div class="cv-profile chinese-body">
+              <p>12 年電商與美妝產業設計經驗，擅長以商業洞察驅動設計，平衡品牌美感與轉換率。具備 HTML/CSS 實作與 IT 協作經驗，目前進修前端開發，專注於 UI/UX 互動細節與設計落地。</p>
+            </div>
+          </section>
+
+          <section class="cv-block">
+            <h2 class="cv-title reveal" data-reveal="scroll">Work Experience</h2>
+            <ol class="cv-jobs">
+              <li class="reveal" data-reveal="scroll">
+                <p class="cv-date">2022/08 — 2025/09</p>
+                <div>
+                  <h3>friDay購物 ｜ 遠時數位科技</h3>
+                  <p class="cv-role">資深視覺設計</p>
+                  <ul>
+                    <li>負責全站大檔期視覺規劃，確保 RWD 跨裝置一致性</li>
+                    <li>運用 HTML/CSS 調整樣式，與 IT 協作優化網頁效果</li>
+                    <li>靈活對接多部門需求，在規範下精準達成商業美感平衡</li>
+                  </ul>
+                  <a class="cv-link" href="EC_ysdt.html">View Project<span class="material-symbols-outlined">arrow_forward</span></a>
+                </div>
+              </li>
+              <li class="reveal" data-reveal="scroll">
+                <p class="cv-date">2021/12 — 2022/07</p>
+                <div>
+                  <h3>聯邦網通科技</h3>
+                  <p class="cv-role">視覺設計</p>
+                  <ul>
+                    <li>參與官網改版與介面邏輯優化，提升瀏覽順暢度</li>
+                    <li>執行每月檔期視覺發想，管理規格產出並維護品牌調性</li>
+                  </ul>
+                  <a class="cv-link" href="UIUX_papawash.html">View Project<span class="material-symbols-outlined">arrow_forward</span></a>
+                </div>
+              </li>
+              <li class="reveal" data-reveal="scroll">
+                <p class="cv-date">2019/12 — 2021/07</p>
+                <div>
+                  <h3>1028 ｜ 采妍國際行銷</h3>
+                  <p class="cv-role">資深設計</p>
+                  <ul>
+                    <li>執行包裝與視覺概念規劃，控管調性定義至後期校色</li>
+                    <li>策劃商攝構圖並與攝影師協作，產出高吸引力素材</li>
+                    <li>因應各平台規格規劃 Banner，確保視覺一致性</li>
+                  </ul>
+                  <a class="cv-link" href="Visual_1028.html">View Project<span class="material-symbols-outlined">arrow_forward</span></a>
+                </div>
+              </li>
+              <li class="reveal" data-reveal="scroll">
+                <p class="cv-date">2013/03 — 2018/09</p>
+                <div>
+                  <h3>23.5°N｜樂灣國際</h3>
+                  <p class="cv-role">視覺設計</p>
+                  <ul>
+                    <li>獨立負責品牌形象調整與規範，確保全通路一致</li>
+                    <li>負責檔期視覺與商攝構圖，協作產出高品質影像素材</li>
+                    <li>跨領域執行平面、影片與社群內容，具備全方位戰力</li>
+                  </ul>
+                  <a class="cv-link" href="Visual_235.html">View Project<span class="material-symbols-outlined">arrow_forward</span></a>
+                </div>
+              </li>
+            </ol>
+          </section>
+        </div>
+      </div>
+    </main>
+
+
+    <!-- Footer -->
+    <footer class="w-full border-t border-outline-variant bg-background" id="contact">
+      <div class="max-w-[1200px] mx-auto px-grid-margin py-container-padding flex justify-center">
+        <p
+          class="font-body-md text-on-surface-variant uppercase tracking-widest text-center"
+          style="font-size: 0.85rem"
+        >
+          © 2026 KELLY WANG. ALL RIGHTS RESERVED.
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        document.querySelectorAll('[data-reveal="load"]').forEach((el) => {
+          requestAnimationFrame(() => el.classList.add("is-visible"));
+        });
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.15, rootMargin: "0px 0px -80px 0px" }
+        );
+
+        document.querySelectorAll('[data-reveal="scroll"]').forEach((el) => {
+          observer.observe(el);
+        });
+
+        // Mobile nav menu toggle
+        const mobileMenuToggle = document.getElementById("mobile-menu-toggle");
+        const mobileMenuPanel = document.getElementById("mobile-menu-panel");
+        if (mobileMenuToggle && mobileMenuPanel) {
+          const closeMobileMenu = () => {
+            mobileMenuPanel.classList.add("hidden");
+            mobileMenuPanel.classList.remove("flex");
+            mobileMenuToggle.setAttribute("aria-expanded", "false");
+            mobileMenuToggle.querySelector(".material-symbols-outlined").textContent =
+              "menu";
+          };
+          mobileMenuToggle.addEventListener("click", () => {
+            const opening = mobileMenuPanel.classList.contains("hidden");
+            mobileMenuPanel.classList.toggle("hidden", !opening);
+            mobileMenuPanel.classList.toggle("flex", opening);
+            mobileMenuToggle.setAttribute("aria-expanded", String(opening));
+            mobileMenuToggle.querySelector(".material-symbols-outlined").textContent =
+              opening ? "close" : "menu";
+          });
+          mobileMenuPanel.querySelectorAll("a").forEach((link) => {
+            link.addEventListener("click", closeMobileMenu);
+          });
+        }
+      });
+    </script>
+  </body>
+</html>

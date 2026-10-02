@@ -1,0 +1,553 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Kelly Wang — About</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@400;500;600;700&amp;family=Inter:wght@400;500;600;700&amp;family=Noto+Sans+TC:wght@300;400;500;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-surface-variant": "#444748",
+              "on-secondary-fixed": "#1b1c19",
+              "tertiary-fixed-dim": "#ffb4a8",
+              outline: "#747878",
+              "on-background": "#1c1c16",
+              "on-tertiary-fixed": "#410000",
+              "surface-container": "#f2ede4",
+              "secondary-fixed": "#e4e2dd",
+              "surface-tint": "#5f5e5e",
+              tertiary: "#000000",
+              "on-surface": "#1c1c16",
+              "surface-container-high": "#ece8df",
+              "surface-container-highest": "#e6e2d9",
+              "error-container": "#ffdad6",
+              background: "#fdf9f0",
+              "on-primary-fixed-variant": "#474746",
+              "inverse-primary": "#c8c6c5",
+              "on-tertiary-container": "#ea4c3a",
+              "outline-variant": "#c4c7c7",
+              "surface-dim": "#dedad1",
+              "on-secondary-fixed-variant": "#474744",
+              "on-primary": "#ffffff",
+              "on-secondary-container": "#63635f",
+              "primary-fixed": "#e5e2e1",
+              "secondary-container": "#e1dfdb",
+              primary: "#000000",
+              "on-tertiary": "#ffffff",
+              "surface-variant": "#e6e2d9",
+              "primary-container": "#1c1b1b",
+              "inverse-surface": "#32302a",
+              "surface-container-lowest": "#ffffff",
+              "on-secondary": "#ffffff",
+              "on-tertiary-fixed-variant": "#920703",
+              "primary-fixed-dim": "#c8c6c5",
+              "on-primary-fixed": "#1c1b1b",
+              "tertiary-fixed": "#ffdad4",
+              "inverse-on-surface": "#f5f0e7",
+              surface: "#fdf9f0",
+              "surface-container-low": "#f7f3ea",
+              "surface-bright": "#fdf9f0",
+              "on-error": "#ffffff",
+              "secondary-fixed-dim": "#c8c6c2",
+              error: "#ba1a1a",
+              "tertiary-container": "#410000",
+              "on-primary-container": "#858383",
+              secondary: "#5e5e5b",
+              "on-error-container": "#93000a",
+            },
+            borderRadius: {
+              DEFAULT: "0px",
+              lg: "0px",
+              xl: "0px",
+              full: "9999px",
+            },
+            spacing: {
+              "grid-margin": "64px",
+              "bento-gap": "24px",
+              unit: "8px",
+              "grid-gutter": "1px",
+              "container-padding": "32px",
+            },
+            fontFamily: {
+              "body-md": ["Inter"],
+              "display-2xl": ["Bodoni Moda"],
+              "label-caps": ["Inter"],
+              "body-lg": ["Inter"],
+              "nav-link": ["Inter"],
+              "display-lg": ["Bodoni Moda"],
+              "headline-md": ["Bodoni Moda"],
+              "display-lg-mobile": ["Bodoni Moda"],
+              headline: ["Bodoni Moda"],
+              display: ["Bodoni Moda"],
+              body: ["Inter"],
+              label: ["Inter"],
+            },
+            fontSize: {
+              "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+              "display-2xl": [
+                "120px",
+                {
+                  lineHeight: "110px",
+                  letterSpacing: "-0.04em",
+                  fontWeight: "700",
+                },
+              ],
+              "label-caps": [
+                "12px",
+                {
+                  lineHeight: "16px",
+                  letterSpacing: "0.1em",
+                  fontWeight: "600",
+                },
+              ],
+              "body-lg": [
+                "18px",
+                {
+                  lineHeight: "28px",
+                  letterSpacing: "0.01em",
+                  fontWeight: "400",
+                },
+              ],
+              "nav-link": [
+                "14px",
+                {
+                  lineHeight: "20px",
+                  letterSpacing: "0.05em",
+                  fontWeight: "500",
+                },
+              ],
+              "display-lg": [
+                "72px",
+                {
+                  lineHeight: "76px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "600",
+                },
+              ],
+              "headline-md": [
+                "32px",
+                { lineHeight: "40px", fontWeight: "500" },
+              ],
+              "display-lg-mobile": [
+                "48px",
+                {
+                  lineHeight: "52px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "600",
+                },
+              ],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      .bento-border {
+        border: 1px solid theme("colors.outline-variant");
+      }
+      .bento-cell {
+        transition: background-color 400ms ease;
+      }
+      .bento-cell:hover {
+        background-color: theme("colors.surface-container-low");
+      }
+      .nav-active::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -6px;
+        height: 1px;
+        background: theme("colors.on-tertiary-container");
+      }
+      .chinese-body {
+        font-family: "Noto Sans TC", sans-serif;
+        line-height: 2.1;
+        letter-spacing: 0.05em;
+      }
+      .reveal {
+        opacity: 0;
+        transform: translateY(32px);
+        transition:
+          opacity 1600ms cubic-bezier(0.16, 1, 0.3, 1),
+          transform 1600ms cubic-bezier(0.16, 1, 0.3, 1);
+        transition-delay: var(--reveal-delay, 0ms);
+      }
+      .reveal.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          animation-duration: 0.001ms !important;
+          transition-duration: 0.001ms !important;
+        }
+      }
+    </style>
+  </head>
+  <body
+    class="bg-background text-on-background antialiased selection:bg-tertiary-fixed-dim selection:text-primary"
+  >
+    <!-- TopNavBar -->
+    <nav
+      class="bg-background/85 backdrop-blur-md border-b border-outline-variant fixed top-0 left-0 right-0 z-50 h-20"
+    >
+      <div
+        class="max-w-[1200px] mx-auto px-grid-margin h-full flex justify-between items-center"
+      >
+        <a
+          class="font-display-lg text-headline-md uppercase tracking-[0em] text-primary"
+          href="index.html"
+          >KELLY WANG</a
+        >
+        <div class="hidden md:flex gap-10 items-center">
+          <a
+            class="relative font-label-caps text-nav-link uppercase tracking-widest text-on-surface-variant hover:text-on-tertiary-container transition-colors duration-300"
+            href="index.html"
+            >HOME</a
+          >
+          <a
+            class="relative font-label-caps text-nav-link uppercase tracking-widest text-primary hover:text-on-tertiary-container transition-colors duration-300 nav-active"
+            href="about.html"
+            >ABOUT ME</a
+          >
+          <a
+            class="relative font-label-caps text-nav-link uppercase tracking-widest text-on-surface-variant hover:text-on-tertiary-container transition-colors duration-300"
+            href="work.html"
+            >WORKS</a
+          >
+        </div>
+        <div class="flex items-center gap-4">
+          <a
+          class="hidden md:inline-block font-label-caps text-label-caps uppercase bg-primary text-on-primary px-6 py-3 hover:bg-on-tertiary-container transition-colors duration-300 whitespace-nowrap"
+          href="mailto:nnnvywang@gmail.com"
+          >CONTACT</a
+        >
+          <button
+            id="mobile-menu-toggle"
+            class="md:hidden flex items-center justify-center text-primary"
+            aria-label="Toggle menu"
+            aria-expanded="false"
+          >
+            <span class="material-symbols-outlined">menu</span>
+          </button>
+        </div>
+      </div>
+    
+      <div
+        id="mobile-menu-panel"
+        class="hidden md:hidden flex-col items-start gap-6 px-grid-margin py-8 bg-background border-t border-outline-variant absolute top-20 left-0 right-0"
+      >
+          <a
+            class="relative font-label-caps text-nav-link uppercase tracking-widest text-on-surface-variant hover:text-on-tertiary-container transition-colors duration-300"
+            href="index.html"
+            >HOME</a
+          >
+          <a
+            class="relative font-label-caps text-nav-link uppercase tracking-widest text-primary hover:text-on-tertiary-container transition-colors duration-300 nav-active"
+            href="about.html"
+            >ABOUT ME</a
+          >
+          <a
+            class="relative font-label-caps text-nav-link uppercase tracking-widest text-on-surface-variant hover:text-on-tertiary-container transition-colors duration-300"
+            href="work.html"
+            >WORKS</a
+          >
+          <a
+            class="mobile-menu-cta font-label-caps text-label-caps uppercase bg-primary text-on-primary px-6 py-3 hover:bg-on-tertiary-container transition-colors duration-300 mt-2"
+            href="mailto:nnnvywang@gmail.com"
+            >CONTACT</a
+          >
+        </div>
+    </nav>
+
+    <main class="pt-[15rem] px-grid-margin pb-16 max-w-[1200px] mx-auto w-full">
+      <!-- Hero: Biography Introduction -->
+      <section
+        class="min-h-[60vh] flex flex-col justify-center border-b bento-border pb-16 mb-16 md:mb-24 relative"
+      >
+        <svg
+          class="absolute top-12 right-0 text-outline-variant hidden md:block"
+          width="28"
+          height="28"
+          viewBox="0 0 24 24"
+          fill="none"
+        >
+          <path d="M12 3v18M3 12h18" stroke="currentColor" stroke-width="1" />
+        </svg>
+
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-0">
+          <div class="col-span-1 md:col-span-8 flex flex-col justify-center pr-0 md:pr-16">
+            <h1
+              class="reveal font-display-2xl text-display-lg-mobile md:text-display-2xl text-primary leading-none uppercase mb-8"
+              data-reveal="load"
+              style="--reveal-delay: 120ms"
+            >
+              Hi,<br />I'm
+              <span class="text-on-tertiary-container">Kelly</span> WANG
+            </h1>
+            <div
+              class="reveal chinese-body text-on-surface-variant text-[15px] sm:text-[18px] max-w-[34rem] font-normal"
+              data-reveal="load"
+              style="--reveal-delay: 400ms; line-height: 2"
+            >
+              <p>
+                擁有12年資深設計經驗，深耕電商與美妝產業，擅長以商業洞察驅動設計，精準平衡美感與轉換率。除視覺執行外，我具備 HTML/CSS 基礎實作與 IT 協作經驗。目前正積極進修前端開發技能，目標是透過理解技術邏輯優化 UI/UX 互動細節。我致力於結合消費者思維與前端實作，確保設計方案精準落地，為品牌賦予數位生命力，創造具商業競爭力的用戶體驗。
+              </p>
+            </div>
+            <a
+              class="reveal inline-flex w-1/3 min-w-[140px] items-center justify-center border border-primary text-primary font-label-caps text-label-caps px-4 py-2.5 mt-8 tracking-widest uppercase hover:bg-primary hover:text-on-primary transition-colors"
+              href="resume.html"
+              data-reveal="load"
+              style="--reveal-delay: 640ms"
+            >
+              VIEW RESUME
+              <span class="material-symbols-outlined text-sm">arrow_forward</span>
+            </a>
+          </div>
+          <div
+            class="col-span-1 md:col-span-4 relative mt-12 md:mt-0 md:-ml-28 flex justify-center md:justify-end"
+          >
+            <img
+              alt="Editorial Portrait"
+              class="reveal w-full max-w-[800px] h-auto object-contain"
+              data-alt="A striking editorial portrait of a young woman with dark bobbed hair wearing dark sunglasses and a structured black blazer, set against a stark, high-contrast red background, composited on a tilted crimson oval backdrop with the portrait bleeding above the frame."
+              data-reveal="load"
+              style="--reveal-delay: 260ms"
+              src="assets/images/Kelly_w.png"
+            />
+          </div>
+        </div>
+      </section>
+
+      <!-- Skills & Tools -->
+      <section class="mb-16 md:mb-24 text-center" data-purpose="skills-and-tools">
+        <h2
+          class="font-label-caps text-[14.4px] leading-[19.2px] font-semibold tracking-[0.1em] text-on-tertiary-container mb-10 uppercase"
+        >
+          SKILLS &amp; TOOLS
+        </h2>
+        <div
+          class="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-outline-variant bento-border text-left"
+        >
+          <div
+            class="reveal bg-surface p-container-padding hover:bg-surface-container-low transition-colors duration-300"
+            data-reveal="scroll"
+          >
+            <h3 class="font-headline-md text-headline-md text-primary mb-3">
+              UI/UX Design
+            </h3>
+            <p class="chinese-body text-on-surface-variant text-[15px] font-normal opacity-90">
+              Figma / Design Systems / User Flow / Prototyping
+            </p>
+          </div>
+          <div
+            class="reveal bg-surface p-container-padding hover:bg-surface-container-low transition-colors duration-300"
+            data-reveal="scroll"
+            style="--reveal-delay: 140ms"
+          >
+            <h3 class="font-headline-md text-headline-md text-primary mb-3">
+              Visual &amp; Tools
+            </h3>
+            <p class="chinese-body text-on-surface-variant text-[15px] font-normal opacity-90">
+              Photoshop / Illustrator / VS Code / Brand Identity / Graphic Design / Packaging Design / ChatGPT / Claude / Stitch
+            </p>
+          </div>
+          <div
+            class="reveal bg-surface p-container-padding hover:bg-surface-container-low transition-colors duration-300"
+            data-reveal="scroll"
+            style="--reveal-delay: 280ms"
+          >
+            <h3 class="font-headline-md text-headline-md text-primary mb-3">
+              Development
+            </h3>
+            <p class="chinese-body text-on-surface-variant text-[15px] font-normal opacity-90">
+              HTML5 / CSS / JavaScript / GitHub
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Experience -->
+      <section class="mb-16 text-center" data-purpose="work-experience">
+        <h2
+          class="font-label-caps text-[14.4px] leading-[19.2px] font-semibold tracking-[0.1em] text-on-tertiary-container mb-12 uppercase"
+        >
+          EXPERIENCE
+        </h2>
+        <div class="relative pl-6 sm:pl-8 space-y-12 max-w-2xl mx-auto text-left">
+          <div
+            aria-hidden="true"
+            class="absolute left-[7px] top-3 bottom-6 w-px bg-outline-variant"
+          ></div>
+          <!-- Timeline Item 1 -->
+          <div class="reveal relative flex flex-col gap-2" data-reveal="scroll">
+            <div
+              class="absolute -left-6 sm:-left-8 top-1.5 w-[15px] h-[15px] rounded-full bg-primary ring-4 ring-background"
+            ></div>
+            <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-8">
+              <div class="font-label-caps text-label-caps text-primary w-28 sm:w-32 shrink-0">
+                2022 – 2025
+              </div>
+              <h3 class="font-headline-md text-2xl sm:text-[26px] text-primary leading-snug">
+                FriDay 購物 ｜ 遠時數位科技
+              </h3>
+            </div>
+            <div class="sm:pl-40 space-y-2.5">
+              <p class="chinese-body text-on-background text-[15px] sm:text-[16px] opacity-80">
+                資深視覺設計師
+              </p>
+              <ul class="chinese-body text-on-surface-variant text-[14px] sm:text-[15px]">
+                <li>• 跨平台介面與視覺整合</li>
+                <li>• 介面樣式調整與技術協作</li>
+                <li>• 多部門設計需求對接</li>
+              </ul>
+            </div>
+          </div>
+          <!-- Timeline Item 2 -->
+          <div class="reveal relative flex flex-col gap-2" data-reveal="scroll" style="--reveal-delay: 160ms">
+            <div
+              class="absolute -left-6 sm:-left-8 top-1.5 w-[15px] h-[15px] rounded-full bg-primary ring-4 ring-background"
+            ></div>
+            <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-8">
+              <div class="font-label-caps text-label-caps text-primary w-28 sm:w-32 shrink-0">
+                2021 – 2022
+              </div>
+              <h3 class="font-headline-md text-2xl sm:text-[26px] text-primary leading-snug">
+                聯邦網通科技
+              </h3>
+            </div>
+            <div class="sm:pl-40 space-y-2.5">
+              <p class="chinese-body text-on-background text-[15px] sm:text-[16px] opacity-80">
+                資深視覺設計師
+              </p>
+              <ul class="chinese-body text-on-surface-variant text-[14px] sm:text-[15px]">
+                <li>• 介面改版與 UI 優化</li>
+                <li>• 電商視覺策略規劃</li>
+              </ul>
+            </div>
+          </div>
+          <!-- Timeline Item 3 -->
+          <div class="reveal relative flex flex-col gap-2" data-reveal="scroll" style="--reveal-delay: 320ms">
+            <div
+              class="absolute -left-6 sm:-left-8 top-1.5 w-[15px] h-[15px] rounded-full bg-primary ring-4 ring-background"
+            ></div>
+            <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-8">
+              <div class="font-label-caps text-label-caps text-primary w-28 sm:w-32 shrink-0">
+                2019 – 2021
+              </div>
+              <h3 class="font-headline-md text-2xl sm:text-[26px] text-primary leading-snug">
+                1028 ｜ 采妍國際行銷
+              </h3>
+            </div>
+            <div class="sm:pl-40 space-y-2.5">
+              <p class="chinese-body text-on-background text-[15px] sm:text-[16px] opacity-80">
+                資深設計師
+              </p>
+              <ul class="chinese-body text-on-surface-variant text-[14px] sm:text-[15px]">
+                <li>• 產品識別與視覺系統建立</li>
+                <li>• 數位內容與商業攝影策劃</li>
+              </ul>
+            </div>
+          </div>
+                    <!-- Timeline Item 3 -->
+          <div class="reveal relative flex flex-col gap-2" data-reveal="scroll" style="--reveal-delay: 320ms">
+            <div
+              class="absolute -left-6 sm:-left-8 top-1.5 w-[15px] h-[15px] rounded-full bg-primary ring-4 ring-background"
+            ></div>
+            <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-8">
+              <div class="font-label-caps text-label-caps text-primary w-28 sm:w-32 shrink-0">
+                2013 – 2018
+              </div>
+              <h3 class="font-headline-md text-2xl sm:text-[26px] text-primary leading-snug">
+                23.5°N ｜ 樂灣國際
+              </h3>
+            </div>
+            <div class="sm:pl-40 space-y-2.5">
+              <p class="chinese-body text-on-background text-[15px] sm:text-[16px] opacity-80">
+                資深設計師
+              </p>
+              <ul class="chinese-body text-on-surface-variant text-[14px] sm:text-[15px]">
+                <li>• 品牌調性維護與視覺統一</li>
+                <li>• 視覺策劃與執行</li>
+                <li>• 跨領域視覺產出</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full border-t border-outline-variant bg-background" id="contact">
+      <div class="max-w-[1200px] mx-auto px-grid-margin py-container-padding flex justify-center">
+        <p
+          class="font-body-md text-on-surface-variant uppercase tracking-widest text-center"
+          style="font-size: 0.85rem"
+        >
+          © 2026 KELLY WANG. ALL RIGHTS RESERVED.
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        document.querySelectorAll('[data-reveal="load"]').forEach((el) => {
+          requestAnimationFrame(() => el.classList.add("is-visible"));
+        });
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.15, rootMargin: "0px 0px -80px 0px" }
+        );
+
+        document.querySelectorAll('[data-reveal="scroll"]').forEach((el) => {
+          observer.observe(el);
+        });
+
+        // Mobile nav menu toggle
+        const mobileMenuToggle = document.getElementById("mobile-menu-toggle");
+        const mobileMenuPanel = document.getElementById("mobile-menu-panel");
+        if (mobileMenuToggle && mobileMenuPanel) {
+          const closeMobileMenu = () => {
+            mobileMenuPanel.classList.add("hidden");
+            mobileMenuPanel.classList.remove("flex");
+            mobileMenuToggle.setAttribute("aria-expanded", "false");
+            mobileMenuToggle.querySelector(".material-symbols-outlined").textContent =
+              "menu";
+          };
+          mobileMenuToggle.addEventListener("click", () => {
+            const opening = mobileMenuPanel.classList.contains("hidden");
+            mobileMenuPanel.classList.toggle("hidden", !opening);
+            mobileMenuPanel.classList.toggle("flex", opening);
+            mobileMenuToggle.setAttribute("aria-expanded", String(opening));
+            mobileMenuToggle.querySelector(".material-symbols-outlined").textContent =
+              opening ? "close" : "menu";
+          });
+          mobileMenuPanel.querySelectorAll("a").forEach((link) => {
+            link.addEventListener("click", closeMobileMenu);
+          });
+        }
+      });
+    </script>
+  </body>
+</html>
