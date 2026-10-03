@@ -206,13 +206,13 @@
   >
     <!-- TopNavBar -->
     <nav
-      class="bg-background/85 backdrop-blur-md border-b border-outline-variant fixed top-0 left-0 right-0 z-50 h-20"
+      class="bg-background/85 backdrop-blur-md border-b border-outline-variant fixed top-0 left-0 right-0 z-50 h-16 md:h-20"
     >
       <div
-        class="max-w-[1200px] mx-auto px-grid-margin h-full flex justify-between items-center"
+        class="max-w-[1200px] mx-auto px-10 md:px-grid-margin h-full flex justify-between items-center"
       >
         <a
-          class="font-display-lg text-headline-md uppercase tracking-[0em] text-primary"
+          class="font-display-lg text-[22px] leading-none md:text-headline-md uppercase tracking-[0em] text-primary"
           href="index.html"
           >KELLY WANG</a
         >
@@ -252,7 +252,7 @@
     
       <div
         id="mobile-menu-panel"
-        class="hidden md:hidden flex-col items-start gap-6 px-grid-margin py-8 bg-background border-t border-outline-variant absolute top-20 left-0 right-0"
+        class="hidden md:hidden flex-col items-start gap-6 px-10 md:px-grid-margin py-8 bg-background border-t border-outline-variant absolute top-16 md:top-20 left-0 right-0"
       >
           <a
             class="relative font-label-caps text-nav-link uppercase tracking-widest text-on-surface-variant hover:text-on-tertiary-container transition-colors duration-300"
@@ -276,14 +276,14 @@
           >
         </div>
     </nav>
-    <main class="pt-32 px-grid-margin pb-16 max-w-[1200px] mx-auto w-full">
+    <main class="pt-32 px-10 md:px-grid-margin pb-16 max-w-[1200px] mx-auto w-full">
       <!-- Hero Section -->
       <header
-        class="mb-16 md:mb-24 text-center md:text-left flex flex-col md:flex-row justify-between items-end gap-8"
+        class="mb-16 md:mb-24 text-left flex flex-col md:flex-row justify-between items-start md:items-end gap-8"
       >
         <div>
           <h1
-            class="reveal font-display text-[calc((100vw-128px)/5.2)] md:text-[90px] font-bold tracking-[-0.04em] text-primary leading-none uppercase"
+            class="reveal font-display text-[65px] md:text-[90px] font-semibold md:font-bold tracking-[-0.04em] text-primary leading-none uppercase"
             data-reveal="load"
             style="--reveal-delay: 120ms"
           >
@@ -298,13 +298,13 @@
           精選涵蓋 UI/UX 設計、品牌視覺與前端開發的代表性專案，展現從概念構思到程式落地的完整歷程。
         </p>
       </header>
-      <nav class="flex justify-end mb-8 border-b border-outline-variant pb-4">
-        <ul class="flex gap-8 items-center">
+      <nav class="flex justify-start md:justify-end mb-8 border-b border-outline-variant pb-4">
+        <ul class="flex gap-4 md:gap-8 items-center">
           <li class="">
             <a
               href="#"
               data-filter="all"
-              class="filter-tab font-label text-label-caps text-primary border-b-2 border-primary pb-4 transition-colors"
+              class="filter-tab font-label text-[11px] tracking-wider md:text-label-caps whitespace-nowrap text-primary border-b-2 border-primary pb-4 transition-colors"
               >ALL</a
             >
           </li>
@@ -312,7 +312,7 @@
             <a
               href="#"
               data-filter="ui-ux"
-              class="filter-tab font-label text-label-caps text-on-surface-variant border-b-2 border-transparent pb-4 hover:text-primary transition-colors"
+              class="filter-tab font-label text-[11px] tracking-wider md:text-label-caps whitespace-nowrap text-on-surface-variant border-b-2 border-transparent pb-4 hover:text-primary transition-colors"
               >UI/UX</a
             >
           </li>
@@ -320,7 +320,7 @@
             <a
               href="#"
               data-filter="front-end"
-              class="filter-tab font-label text-label-caps text-on-surface-variant border-b-2 border-transparent pb-4 hover:text-primary transition-colors"
+              class="filter-tab font-label text-[11px] tracking-wider md:text-label-caps whitespace-nowrap text-on-surface-variant border-b-2 border-transparent pb-4 hover:text-primary transition-colors"
               >FRONT-END</a
             >
           </li>
@@ -328,7 +328,7 @@
             <a
               href="#"
               data-filter="visual-design"
-              class="filter-tab font-label text-label-caps text-on-surface-variant border-b-2 border-transparent pb-4 hover:text-primary transition-colors"
+              class="filter-tab font-label text-[11px] tracking-wider md:text-label-caps whitespace-nowrap text-on-surface-variant border-b-2 border-transparent pb-4 hover:text-primary transition-colors"
               >VISUAL DESIGN</a
             >
           </li>
@@ -560,10 +560,9 @@
     </main>
     <!-- Footer -->
     <footer class="w-full border-t border-outline-variant bg-background">
-      <div class="max-w-[1200px] mx-auto px-grid-margin py-container-padding flex justify-center">
+      <div class="max-w-[1200px] mx-auto px-10 md:px-grid-margin py-3 md:py-container-padding flex justify-center">
         <p
-          class="font-body-md text-on-surface-variant uppercase tracking-widest text-center"
-          style="font-size: 0.85rem"
+          class="font-body-md text-[10px] md:text-[0.85rem] text-on-surface-variant uppercase tracking-normal md:tracking-widest text-center whitespace-nowrap"
         >
           © 2026 KELLY WANG. ALL RIGHTS RESERVED.
         </p>

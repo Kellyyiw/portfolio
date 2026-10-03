@@ -208,13 +208,13 @@
   >
     <!-- TopNavBar -->
     <nav
-      class="bg-background/85 backdrop-blur-md border-b border-outline-variant fixed top-0 left-0 right-0 z-50 h-20"
+      class="bg-background/85 backdrop-blur-md border-b border-outline-variant fixed top-0 left-0 right-0 z-50 h-16 md:h-20"
     >
       <div
-        class="max-w-[1200px] mx-auto px-grid-margin h-full flex justify-between items-center"
+        class="max-w-[1200px] mx-auto px-10 md:px-grid-margin h-full flex justify-between items-center"
       >
         <a
-          class="font-display-lg text-headline-md uppercase tracking-[0em] text-primary"
+          class="font-display-lg text-[22px] leading-none md:text-headline-md uppercase tracking-[0em] text-primary"
           href="index.html"
           >KELLY WANG</a
         >
@@ -254,7 +254,7 @@
     
       <div
         id="mobile-menu-panel"
-        class="hidden md:hidden flex-col items-start gap-6 px-grid-margin py-8 bg-background border-t border-outline-variant absolute top-20 left-0 right-0"
+        class="hidden md:hidden flex-col items-start gap-6 px-10 md:px-grid-margin py-8 bg-background border-t border-outline-variant absolute top-16 md:top-20 left-0 right-0"
       >
           <a
             class="relative font-label-caps text-nav-link uppercase tracking-widest text-primary hover:text-on-tertiary-container transition-colors duration-300 nav-active"
@@ -279,10 +279,10 @@
         </div>
     </nav>
 
-    <main class="pt-20 px-grid-margin pb-16 max-w-[1200px] mx-auto w-full">
+    <main class="pt-16 md:pt-20 px-10 md:px-grid-margin pb-16 max-w-[1200px] mx-auto w-full">
       <!-- Hero Section -->
       <section
-        class="min-h-[80vh] flex flex-col justify-center border-b bento-border pb-16 mb-16 relative"
+        class="pt-14 md:pt-0 md:min-h-[76vh] flex flex-col justify-center border-b bento-border pb-16 mb-16 relative"
       >
         <svg
           class="absolute top-12 right-0 text-outline-variant hidden md:block"
@@ -298,7 +298,7 @@
           <div class="col-span-1 md:col-span-8 flex flex-col justify-center pr-0 md:pr-16">
             <h1
               id="hero-h1"
-              class="font-display-2xl text-display-lg-mobile md:text-display-2xl text-primary leading-none uppercase mb-8"
+              class="font-display-2xl text-[55px] font-semibold md:text-display-2xl text-primary leading-none uppercase mb-8"
             >
               Hi,<br />I'm
               <span class="text-on-tertiary-container">Kelly</span> WANG
@@ -337,7 +337,7 @@
       <section class="mb-16">
         <div class="flex justify-between items-end mb-8">
           <h2
-            class="reveal font-display-lg text-[65px] leading-[65px] font-semibold tracking-[-0.02em] text-primary uppercase"
+            class="reveal font-display-lg text-[44px] leading-[44px] md:text-[65px] md:leading-[65px] font-semibold tracking-[-0.02em] text-primary uppercase"
             data-reveal="scroll"
           >
             SELECTED<br /><span class="text-on-tertiary-container">WORKS</span>
@@ -450,10 +450,9 @@
 
     <!-- Footer -->
     <footer class="w-full border-t border-outline-variant bg-background">
-      <div class="max-w-[1200px] mx-auto px-grid-margin py-container-padding flex justify-center">
+      <div class="max-w-[1200px] mx-auto px-10 md:px-grid-margin py-3 md:py-container-padding flex justify-center">
         <p
-          class="font-body-md text-on-surface-variant uppercase tracking-widest text-center"
-          style="font-size: 0.85rem"
+          class="font-body-md text-[10px] md:text-[0.85rem] text-on-surface-variant uppercase tracking-normal md:tracking-widest text-center whitespace-nowrap"
         >
           © 2026 KELLY WANG. ALL RIGHTS RESERVED.
         </p>

@@ -200,13 +200,13 @@
   >
     <!-- TopNavBar -->
     <nav
-      class="bg-background/85 backdrop-blur-md border-b border-outline-variant fixed top-0 left-0 right-0 z-50 h-20"
+      class="bg-background/85 backdrop-blur-md border-b border-outline-variant fixed top-0 left-0 right-0 z-50 h-16 md:h-20"
     >
       <div
-        class="max-w-[1200px] mx-auto px-grid-margin h-full flex justify-between items-center"
+        class="max-w-[1200px] mx-auto px-10 md:px-grid-margin h-full flex justify-between items-center"
       >
         <a
-          class="font-display-lg text-headline-md uppercase tracking-[0em] text-primary"
+          class="font-display-lg text-[22px] leading-none md:text-headline-md uppercase tracking-[0em] text-primary"
           href="index.html"
           >KELLY WANG</a
         >
@@ -246,7 +246,7 @@
     
       <div
         id="mobile-menu-panel"
-        class="hidden md:hidden flex-col items-start gap-6 px-grid-margin py-8 bg-background border-t border-outline-variant absolute top-20 left-0 right-0"
+        class="hidden md:hidden flex-col items-start gap-6 px-10 md:px-grid-margin py-8 bg-background border-t border-outline-variant absolute top-16 md:top-20 left-0 right-0"
       >
           <a
             class="relative font-label-caps text-nav-link uppercase tracking-widest text-on-surface-variant hover:text-on-tertiary-container transition-colors duration-300"
@@ -272,7 +272,7 @@
     </nav>
     <!-- Main Content -->
     <main class="flex-grow pt-32 pb-24">
-      <div class="max-w-[1200px] mx-auto px-grid-margin w-full">
+      <div class="max-w-[1200px] mx-auto px-10 md:px-grid-margin w-full">
         <!-- Top Section: Split Layout -->
         <!-- 電腦版改用 grid：標題獨佔第一列，右側資訊與段落同列起始，頂端對齊段落第一行 -->
         <div
@@ -297,7 +297,7 @@
           </div>
           <!-- Right: Metadata -->
           <div
-            class="reveal flex flex-col items-end md:col-start-2 md:row-start-2 md:self-start md:justify-self-end md:mt-[3px]"
+            class="reveal flex flex-col items-start md:items-end md:col-start-2 md:row-start-2 md:self-start md:justify-self-end md:mt-[3px]"
             data-reveal="load"
             style="--reveal-delay: 640ms"
           >
@@ -467,7 +467,7 @@
           >
             <h2 class="font-headline-md text-headline-md">More Projects</h2>
             <a
-              class="inline-flex items-center space-x-2 font-label-caps text-label-caps uppercase border-b border-primary pb-1 hover:text-on-tertiary-container hover:border-on-tertiary-container transition-colors"
+              class="hidden md:inline-flex items-center space-x-2 font-label-caps text-label-caps uppercase border-b border-primary pb-1 hover:text-on-tertiary-container hover:border-on-tertiary-container transition-colors"
               href="work.html"
             >
               <span>SEE ALL WORKS</span>
@@ -550,15 +550,23 @@
               </div>
             </a>
           </div>
+          <div class="mt-8 md:hidden">
+            <a
+              class="inline-flex items-center space-x-2 font-label-caps text-label-caps uppercase border-b border-primary pb-1 hover:text-on-tertiary-container hover:border-on-tertiary-container transition-colors"
+              href="work.html"
+            >
+              <span>SEE ALL WORKS</span>
+              <span class="material-symbols-outlined text-sm">arrow_forward</span>
+            </a>
+          </div>
         </div>
       </div>
     </main>
     <!-- Footer -->
     <footer class="w-full border-t border-outline-variant bg-background">
-      <div class="max-w-[1200px] mx-auto px-grid-margin py-container-padding flex justify-center">
+      <div class="max-w-[1200px] mx-auto px-10 md:px-grid-margin py-3 md:py-container-padding flex justify-center">
         <p
-          class="font-body-md text-on-surface-variant uppercase tracking-widest text-center"
-          style="font-size: 0.85rem"
+          class="font-body-md text-[10px] md:text-[0.85rem] text-on-surface-variant uppercase tracking-normal md:tracking-widest text-center whitespace-nowrap"
         >
           © 2026 KELLY WANG. ALL RIGHTS RESERVED.
         </p>
