@@ -228,7 +228,7 @@
             >ABOUT ME</a
           >
           <a
-            class="relative font-label-caps text-nav-link uppercase tracking-widest text-primary hover:text-on-tertiary-container transition-colors duration-300 nav-active"
+            class="relative font-label-caps text-nav-link uppercase tracking-widest font-semibold text-on-tertiary-container transition-colors duration-300 nav-active"
             href="work.html"
             >WORKS</a
           >
@@ -265,7 +265,7 @@
             >ABOUT ME</a
           >
           <a
-            class="relative font-label-caps text-nav-link uppercase tracking-widest text-primary hover:text-on-tertiary-container transition-colors duration-300 nav-active"
+            class="relative font-label-caps text-nav-link uppercase tracking-widest font-semibold text-on-tertiary-container transition-colors duration-300 nav-active"
             href="work.html"
             >WORKS</a
           >
@@ -299,12 +299,12 @@
         </p>
       </header>
       <nav class="flex justify-start md:justify-end mb-8 border-b border-outline-variant pb-4">
-        <ul class="flex gap-4 md:gap-8 items-center">
+        <ul class="flex w-full md:w-auto justify-between md:justify-start gap-2 md:gap-8 items-center">
           <li class="">
             <a
               href="#"
               data-filter="all"
-              class="filter-tab font-label text-[11px] tracking-wider md:text-label-caps whitespace-nowrap text-primary border-b-2 border-primary pb-4 transition-colors"
+              class="filter-tab font-label text-[11px] tracking-wider md:text-label-caps whitespace-nowrap font-semibold text-on-tertiary-container border-b-2 border-on-tertiary-container pb-4 transition-colors"
               >ALL</a
             >
           </li>
@@ -626,10 +626,12 @@
 
             filterTabs.forEach((t) => {
               const isActive = t === tab;
-              t.classList.toggle("text-primary", isActive);
-              t.classList.toggle("border-primary", isActive);
+              t.classList.toggle("font-semibold", isActive);
+              t.classList.toggle("text-on-tertiary-container", isActive);
+              t.classList.toggle("border-on-tertiary-container", isActive);
               t.classList.toggle("text-on-surface-variant", !isActive);
               t.classList.toggle("border-transparent", !isActive);
+              t.classList.toggle("hover:text-primary", !isActive);
             });
 
             projectCards.forEach((card) => {
